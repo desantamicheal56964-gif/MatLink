@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --color-matte-purple: #7561A8;
+  --color-dark-purple: #51416F;
+  --color-light-grey: #F1F2F5;
+  --color-medium-grey: #8B8D98;
+  --color-sky-blue: #72B9E8;
+  --color-dark-text: #252536;
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F2F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #8B8D98;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7561A8;
+}
+
+/* Glassmorphism & card polish */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(117, 97, 168, 0.15);
+}
+
+.glass-panel-dark {
+  background: rgba(81, 65, 111, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes scanline {
+  0% { top: 2%; opacity: 0.85; }
+  50% { top: 94%; opacity: 1; }
+  100% { top: 2%; opacity: 0.85; }
+}
+
+.animate-scanline {
+  animation: scanline 2.4s ease-in-out infinite;
+}
+

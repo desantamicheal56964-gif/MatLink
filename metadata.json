@@ -1,0 +1,6 @@
+{
+  "name": "CircuBuild - Construction Material Sustainability Platform",
+  "description": "Digital Platform for Sustainable Use of Construction Material. Connects builders, contractors, and engineers across Pune to buy, sell, inspect, and reuse leftover construction materials.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
