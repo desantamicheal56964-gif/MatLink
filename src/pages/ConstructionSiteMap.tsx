@@ -55,23 +55,28 @@ export const ConstructionSiteMap: React.FC<ConstructionSiteMapProps> = ({
     return () => window.removeEventListener('gmp-quota-exceeded', handleQuota);
   }, []);
 
-  useEffect(() => {
-    async function loadData() {
-      const s = await db.getConstructionSites();
-      const m = await db.getMaterials();
-      setSites(s);
-      setMaterials(m);
+  const loadData = async (applyInitial = false) => {
+    const s = await db.getConstructionSites();
+    const m = await db.getMaterials();
+    setSites(s);
+    setMaterials(m);
 
-      if (initialSiteId) {
-        const found = s.find((x) => x.id === initialSiteId);
-        if (found) {
-          setSelectedSite(found);
-          setMapCenter({ lat: Number(found.latitude), lng: Number(found.longitude) });
-          setMapZoom(14);
-        }
+    if (applyInitial && initialSiteId) {
+      const found = s.find((x) => x.id === initialSiteId);
+      if (found) {
+        setSelectedSite(found);
+        setMapCenter({ lat: Number(found.latitude), lng: Number(found.longitude) });
+        setMapZoom(14);
       }
     }
-    loadData();
+  };
+
+  useEffect(() => {
+    loadData(true);
+    const unsubscribe = db.subscribeToMaterials(() => {
+      loadData(false);
+    });
+    return unsubscribe;
   }, [initialSiteId]);
 
   const mapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
@@ -251,12 +256,8 @@ export const ConstructionSiteMap: React.FC<ConstructionSiteMapProps> = ({
           {[
             { id: 'all', label: `All Sites (${sites.length})` },
             { id: 'selling', label: 'Surplus Stock Available' },
-            { id: 'reused', label: 'Completed Circular Reuse' },
-            { id: 'it_corridor', label: 'IT Corridors (Hinjawadi, Kharadi, Magarpatta, Balewadi)' },
+            { id: 'it_corridor', label: 'IT Corridors (Hinjawadi, Kharadi, Balewadi)' },
             { id: 'pcmc', label: 'PCMC & Industrial (Chakan, Ravet, Moshi, Pimpri)' },
-            { id: 'cement', label: 'Sites With Cement' },
-            { id: 'steel', label: 'Sites With Steel' },
-            { id: 'bricks', label: 'Sites With Bricks' },
           ].map((tab) => (
             <button
               key={tab.id}

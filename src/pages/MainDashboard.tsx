@@ -1,20 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   ShoppingBag,
   PlusCircle,
   MapPin,
   BarChart3,
-  TrendingDown,
   Recycle,
   Users,
   Building,
   CheckCircle2,
   DollarSign,
   ArrowRight,
-  Sparkles,
   Layers,
   Leaf,
-  Calendar,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../services/db';
@@ -31,21 +28,26 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({ onNavigate }) => {
   const [nearbySites, setNearbySites] = useState<ConstructionSite[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function loadDashboardData() {
-      setLoading(true);
-      const met = await db.getPlatformMetrics();
-      setMetrics(met);
+  const loadDashboardData = useCallback(async (silent = false) => {
+    if (!silent) setLoading(true);
+    const met = await db.getPlatformMetrics();
+    setMetrics(met);
 
-      const mats = await db.getMaterials();
-      setRecentMaterials(mats.filter((m) => m.status === 'available').slice(0, 4));
+    const mats = await db.getMaterials();
+    setRecentMaterials(mats.filter((m) => m.status === 'available').slice(0, 3));
 
-      const s = await db.getConstructionSites();
-      setNearbySites(s.slice(0, 4));
-      setLoading(false);
-    }
-    loadDashboardData();
+    const s = await db.getConstructionSites();
+    setNearbySites(s.slice(0, 4));
+    if (!silent) setLoading(false);
   }, []);
+
+  useEffect(() => {
+    loadDashboardData(false);
+    const unsubscribe = db.subscribeToMaterials(() => {
+      loadDashboardData(true);
+    });
+    return unsubscribe;
+  }, [loadDashboardData]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -196,10 +198,10 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({ onNavigate }) => {
                 <DollarSign className="w-4 h-4" />
               </div>
             </div>
-            <p className="text-2xl font-black text-[#7561A8]">
-              {loading ? '...' : `₹${metrics?.totalMoneySaved.toLocaleString('en-IN')}`}
+            <p className="text-2xl font-black text-[#7561A8] tabular-nums">
+              {loading ? '...' : `₹${(metrics?.totalMoneySaved ?? 0).toLocaleString('en-IN')}`}
             </p>
-            <p className="text-[11px] text-emerald-600 font-medium mt-1">Average 46% buyer discount</p>
+            <p className="text-[11px] text-[#8B8D98] font-medium mt-1">No demo orders sold yet</p>
           </div>
 
           {/* Card 7: Total Material Reused */}
@@ -249,12 +251,21 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({ onNavigate }) => {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {recentMaterials.map((mat) => {
-              const savings = Math.round(
-                ((mat.original_market_price - mat.selling_price) / mat.original_market_price) * 100
-              );
-              return (
+          {recentMaterials.length === 0 ? (
+            <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center space-y-3 shadow-xs">
+              <div className="w-12 h-12 rounded-2xl bg-[#7561A8]/10 text-[#7561A8] flex items-center justify-center mx-auto">
+                <Layers className="w-6 h-6" />
+              </div>
+              <h3 className="font-display font-bold text-base text-[#252536]">
+                The materials are coming soon
+              </h3>
+              <p className="text-xs text-[#8B8D98] max-w-md mx-auto">
+                No materials are sold or listed as a demo right now. Surplus stock uploaded by Pune sellers will appear here soon.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {recentMaterials.map((mat) => (
                 <div
                   key={mat.id}
                   onClick={() => onNavigate('material-details', { id: mat.id })}
@@ -270,9 +281,6 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({ onNavigate }) => {
                       <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#7561A8] text-white">
                         {mat.category}
                       </span>
-                      <span className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-600 text-white">
-                        {savings}% SAVINGS
-                      </span>
                     </div>
 
                     <div>
@@ -287,21 +295,19 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({ onNavigate }) => {
                   </div>
 
                   <div className="px-4 py-2.5 bg-[#F1F2F5]/60 border-t border-gray-100 flex items-center justify-between text-xs">
-                    <div>
-                      <span className="text-[10px] text-[#8B8D98]">Selling: </span>
-                      <strong className="text-[#252536] font-bold">
-                        ₹{mat.selling_price.toLocaleString('en-IN')}
-                      </strong>
-                      <span className="text-[10px] text-[#8B8D98]"> / {mat.unit}</span>
-                    </div>
-                    <span className="text-[10px] font-semibold text-[#7561A8]">
-                      Qty: {mat.available_quantity}
+                    <span className="text-[10px] font-semibold text-[#51416F] tabular-nums">
+                      {mat.available_quantity} {mat.unit}
+                    </span>
+                    <span className="text-[10px] font-semibold text-[#7561A8] tabular-nums">
+                      {mat.selling_price > 0
+                        ? `₹${mat.selling_price.toLocaleString('en-IN')}/${mat.unit}`
+                        : `Condition: ${mat.condition}`}
                     </span>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Right: Active Construction Sites Around Pune */}

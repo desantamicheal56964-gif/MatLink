@@ -40,8 +40,7 @@ export default async function handler(req: any, res: any) {
         : imageBase64;
 
     if (ai && cleanBase64) {
-      try {
-        const promptText = `You are a strict, objective, and realistic senior construction materials quality engineer and computer vision inspector.
+      const promptText = `You are a strict, objective, and realistic senior construction materials quality engineer and computer vision inspector.
 Examine this photograph very carefully and apply machine learning defect inspection concepts.
 
 CRITICAL RULES:
@@ -80,133 +79,137 @@ CRITICAL RULES:
 3. SIMPLE LANGUAGE REQUIREMENT:
    Explain all defects and advice in simple, everyday conversational English that anyone can easily understand.`;
 
-        const response = await ai.models.generateContent({
-          model: 'gemini-3.8-flash',
-          contents: {
-            parts: [
-              {
-                inlineData: {
-                  mimeType: detectedMime || 'image/jpeg',
-                  data: cleanBase64,
+      const visionModels = ['gemini-3.1-flash-lite', 'gemini-4-hydrogen'];
+      for (const visionModel of visionModels) {
+        try {
+          const response = await ai.models.generateContent({
+            model: visionModel,
+            contents: {
+              parts: [
+                {
+                  inlineData: {
+                    mimeType: detectedMime || 'image/jpeg',
+                    data: cleanBase64,
+                  },
                 },
-              },
-              { text: promptText },
-            ],
-          },
-          config: {
-            responseMimeType: 'application/json',
-            responseSchema: {
-              type: Type.OBJECT,
-              properties: {
-                is_construction_material: {
-                  type: Type.BOOLEAN,
-                  description: 'True if image shows real building or construction material, false if unrelated object/person/food',
-                },
-                detected_object_name: {
-                  type: Type.STRING,
-                  description: 'Identified material or non-construction object name',
-                },
-                material_type: {
-                  type: Type.STRING,
-                  description: 'Specific detected material name, e.g. UltraTech OPC 53 Grade Cement or TMT Fe 550D Steel Rebars',
-                },
-                category: {
-                  type: Type.STRING,
-                  description: 'One of: Cement, Bricks, Sand, Steel, Tiles, Wooden Materials, Pipes, Electrical Materials, Paint, Stone, Doors and Windows, Other Construction Materials',
-                },
-                condition: {
-                  type: Type.STRING,
-                  description: 'Overall visual rating: Excellent, Good, Average, or Poor',
-                },
-                quality_grade: {
-                  type: Type.STRING,
-                  description: 'Simple grade: Excellent, Good, Average, Worst, or Not Construction Material',
-                },
-                is_usable_for_construction: {
-                  type: Type.BOOLEAN,
-                  description: 'True only if safe for construction reuse, false if worst or non-material',
-                },
-                simple_verdict: {
-                  type: Type.STRING,
-                  description: 'One concise verdict sentence in plain simple English',
-                },
-                confidence_score: {
-                  type: Type.NUMBER,
-                  description: 'Confidence rating from 0.0 to 1.0',
-                },
-                visible_damage: {
-                  type: Type.ARRAY,
-                  items: { type: Type.STRING },
-                  description: 'List of observed defects or features in simple words',
-                },
-                cracks_or_breakage: {
-                  type: Type.STRING,
-                  description: 'Simple description of any cracks, chips, or breaks',
-                },
-                rust_or_corrosion: {
-                  type: Type.STRING,
-                  description: 'Simple description of rust or corrosion',
-                },
-                surface_quality: {
-                  type: Type.STRING,
-                  description: 'Simple description of texture and surface condition',
-                },
-                visible_contamination: {
-                  type: Type.STRING,
-                  description: 'Simple description of dirt, moisture, oil, or debris',
-                },
-                suitability_for_reuse: {
-                  type: Type.STRING,
-                  description: 'Plain advice on whether this should be reused, repaired, or discarded as scrap',
-                },
-                ai_generated_description: {
-                  type: Type.STRING,
-                  description: 'Clear description for listing, or explanation if rejected',
-                },
-                recommended_next_steps: {
-                  type: Type.ARRAY,
-                  items: { type: Type.STRING },
-                  description: 'Actionable steps in plain English',
-                },
-                simple_advice: {
-                  type: Type.STRING,
-                  description: 'Direct advice for the user in simple language',
-                },
-                disclaimer: {
-                  type: Type.STRING,
-                  description: 'Non-destructive visual inspection notice',
-                },
-              },
-              required: [
-                'is_construction_material',
-                'material_type',
-                'category',
-                'condition',
-                'quality_grade',
-                'is_usable_for_construction',
-                'simple_verdict',
-                'confidence_score',
-                'visible_damage',
-                'cracks_or_breakage',
-                'rust_or_corrosion',
-                'surface_quality',
-                'visible_contamination',
-                'suitability_for_reuse',
-                'ai_generated_description',
-                'recommended_next_steps',
-                'simple_advice',
-                'disclaimer',
+                { text: promptText },
               ],
             },
-          },
-        });
+            config: {
+              responseMimeType: 'application/json',
+              responseSchema: {
+                type: Type.OBJECT,
+                properties: {
+                  is_construction_material: {
+                    type: Type.BOOLEAN,
+                    description: 'True if image shows real building or construction material, false if unrelated object/person/food',
+                  },
+                  detected_object_name: {
+                    type: Type.STRING,
+                    description: 'Identified material or non-construction object name',
+                  },
+                  material_type: {
+                    type: Type.STRING,
+                    description: 'Specific detected material name, e.g. UltraTech OPC 53 Grade Cement or TMT Fe 550D Steel Rebars',
+                  },
+                  category: {
+                    type: Type.STRING,
+                    description: 'One of: Cement, Bricks, Sand, Steel, Tiles, Wooden Materials, Pipes, Electrical Materials, Paint, Stone, Doors and Windows, Other Construction Materials',
+                  },
+                  condition: {
+                    type: Type.STRING,
+                    description: 'Overall visual rating: Excellent, Good, Average, or Poor',
+                  },
+                  quality_grade: {
+                    type: Type.STRING,
+                    description: 'Simple grade: Excellent, Good, Average, Worst, or Not Construction Material',
+                  },
+                  is_usable_for_construction: {
+                    type: Type.BOOLEAN,
+                    description: 'True only if safe for construction reuse, false if worst or non-material',
+                  },
+                  simple_verdict: {
+                    type: Type.STRING,
+                    description: 'One concise verdict sentence in plain simple English',
+                  },
+                  confidence_score: {
+                    type: Type.NUMBER,
+                    description: 'Confidence rating from 0.0 to 1.0',
+                  },
+                  visible_damage: {
+                    type: Type.ARRAY,
+                    items: { type: Type.STRING },
+                    description: 'List of observed defects or features in simple words',
+                  },
+                  cracks_or_breakage: {
+                    type: Type.STRING,
+                    description: 'Simple description of any cracks, chips, or breaks',
+                  },
+                  rust_or_corrosion: {
+                    type: Type.STRING,
+                    description: 'Simple description of rust or corrosion',
+                  },
+                  surface_quality: {
+                    type: Type.STRING,
+                    description: 'Simple description of texture and surface condition',
+                  },
+                  visible_contamination: {
+                    type: Type.STRING,
+                    description: 'Simple description of dirt, moisture, oil, or debris',
+                  },
+                  suitability_for_reuse: {
+                    type: Type.STRING,
+                    description: 'Plain advice on whether this should be reused, repaired, or discarded as scrap',
+                  },
+                  ai_generated_description: {
+                    type: Type.STRING,
+                    description: 'Clear description for listing, or explanation if rejected',
+                  },
+                  recommended_next_steps: {
+                    type: Type.ARRAY,
+                    items: { type: Type.STRING },
+                    description: 'Actionable steps in plain English',
+                  },
+                  simple_advice: {
+                    type: Type.STRING,
+                    description: 'Direct advice for the user in simple language',
+                  },
+                  disclaimer: {
+                    type: Type.STRING,
+                    description: 'Non-destructive visual inspection notice',
+                  },
+                },
+                required: [
+                  'is_construction_material',
+                  'material_type',
+                  'category',
+                  'condition',
+                  'quality_grade',
+                  'is_usable_for_construction',
+                  'simple_verdict',
+                  'confidence_score',
+                  'visible_damage',
+                  'cracks_or_breakage',
+                  'rust_or_corrosion',
+                  'surface_quality',
+                  'visible_contamination',
+                  'suitability_for_reuse',
+                  'ai_generated_description',
+                  'recommended_next_steps',
+                  'simple_advice',
+                  'disclaimer',
+                ],
+              },
+            },
+          });
 
-        const parsed = JSON.parse(response.text || '{}');
-        parsed.disclaimer =
-          'Preliminary non-destructive visual screening based on photograph. Does not replace formal on-site structural engineering verification or laboratory compressive testing.';
-        return res.status(200).json(parsed);
-      } catch (geminiError) {
-        console.warn('Gemini vision API call error, falling back to heuristic ML engine:', geminiError);
+          const parsed = JSON.parse(response.text || '{}');
+          parsed.disclaimer =
+            'Preliminary non-destructive visual screening based on photograph. Does not replace formal on-site structural engineering verification or laboratory compressive testing.';
+          return res.status(200).json(parsed);
+        } catch {
+          // Try next vision model or fall back to heuristic ML engine
+        }
       }
     }
 

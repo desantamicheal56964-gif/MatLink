@@ -1,7 +1,19 @@
 import React from 'react';
-import { Building2, Shield, Leaf, Heart, ArrowUpRight, MapPin, Mail, Phone } from 'lucide-react';
+import { Building2, Shield, Leaf, MapPin, Mail } from 'lucide-react';
 
-export const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }) => {
+interface FooterProps {
+  onNavigate: (page: string) => void;
+  portalMode?: 'buyer' | 'seller' | null;
+  onSwitchRole?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({
+  onNavigate,
+  portalMode,
+  onSwitchRole,
+}) => {
+  const isSeller = portalMode === 'seller';
+
   return (
     <footer className="bg-[#252536] text-white border-t border-white/10 pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,74 +45,146 @@ export const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNav
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Platform</h4>
-            <ul className="space-y-2 text-xs text-gray-300">
-              <li>
-                <button onClick={() => onNavigate('explore')} className="hover:text-[#72B9E8] transition-colors">
-                  Explore Marketplace
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('map')} className="hover:text-[#72B9E8] transition-colors">
-                  Pune Construction Map
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('inspector')} className="hover:text-[#72B9E8] transition-colors flex items-center gap-1">
-                  AI Material Inspector
-                  <span className="text-[9px] bg-[#7561A8] text-white px-1.5 py-0.2 rounded-full">Vision</span>
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('impact')} className="hover:text-[#72B9E8] transition-colors">
-                  Environmental Impact
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('list-material')} className="hover:text-[#72B9E8] transition-colors">
-                  List Surplus Material
-                </button>
-              </li>
-            </ul>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">
+              {isSeller ? 'Seller Tools' : 'Platform'}
+            </h4>
+            {isSeller ? (
+              <ul className="space-y-2 text-xs text-gray-300">
+                <li>
+                  <button
+                    onClick={() => onNavigate('seller-sell')}
+                    className="hover:text-[#72B9E8] transition-colors"
+                  >
+                    Sell &amp; Upload Material
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => onNavigate('seller-map')}
+                    className="hover:text-[#72B9E8] transition-colors"
+                  >
+                    Site Map Setting
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => onNavigate('seller')}
+                    className="hover:text-[#72B9E8] transition-colors"
+                  >
+                    My Uploaded Materials
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => onNavigate('inspector')}
+                    className="hover:text-[#72B9E8] transition-colors"
+                  >
+                    AI Material Inspector
+                  </button>
+                </li>
+              </ul>
+            ) : (
+              <ul className="space-y-2 text-xs text-gray-300">
+                <li>
+                  <button
+                    onClick={() => onNavigate('explore')}
+                    className="hover:text-[#72B9E8] transition-colors"
+                  >
+                    Explore Marketplace
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => onNavigate('map')}
+                    className="hover:text-[#72B9E8] transition-colors"
+                  >
+                    Pune Construction Map
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => onNavigate('inspector')}
+                    className="hover:text-[#72B9E8] transition-colors flex items-center gap-1"
+                  >
+                    <span>AI Material Inspector</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => onNavigate('impact')}
+                    className="hover:text-[#72B9E8] transition-colors"
+                  >
+                    Environmental Impact
+                  </button>
+                </li>
+              </ul>
+            )}
           </div>
 
           {/* Dashboards & Portals */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Portals</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">
+              Account &amp; Role
+            </h4>
             <ul className="space-y-2 text-xs text-gray-300">
-              <li>
-                <button onClick={() => onNavigate('dashboard')} className="hover:text-[#72B9E8] transition-colors">
-                  Main Dashboard
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('seller')} className="hover:text-[#72B9E8] transition-colors">
-                  Seller Dashboard
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('buyer')} className="hover:text-[#72B9E8] transition-colors">
-                  Buyer Dashboard
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('transactions')} className="hover:text-[#72B9E8] transition-colors">
-                  Transaction Ledger
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('admin')} className="hover:text-[#72B9E8] transition-colors">
-                  Admin Console
-                </button>
-              </li>
+              {!isSeller && (
+                <>
+                  <li>
+                    <button
+                      onClick={() => onNavigate('dashboard')}
+                      className="hover:text-[#72B9E8] transition-colors"
+                    >
+                      Main Dashboard
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => onNavigate('buyer')}
+                      className="hover:text-[#72B9E8] transition-colors"
+                    >
+                      Buyer Dashboard
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => onNavigate('transactions')}
+                      className="hover:text-[#72B9E8] transition-colors"
+                    >
+                      Transaction Ledger
+                    </button>
+                  </li>
+                </>
+              )}
+              {isSeller && (
+                <li>
+                  <button
+                    onClick={() => onNavigate('profile')}
+                    className="hover:text-[#72B9E8] transition-colors"
+                  >
+                    Seller Profile
+                  </button>
+                </li>
+              )}
+              {onSwitchRole && (
+                <li>
+                  <button
+                    onClick={onSwitchRole}
+                    className="hover:text-[#72B9E8] transition-colors"
+                  >
+                    Switch Buyer / Seller
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
 
           {/* Academic & Pune Context */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">EDI Project</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">
+              EDI Project
+            </h4>
             <p className="text-xs text-gray-300 leading-relaxed mb-3">
-              Engineering Design & Innovation (EDI) Project on Sustainable Construction & Municipal Solid Waste Reduction.
+              Engineering Design &amp; Innovation (EDI) Project on Sustainable Construction &amp; Municipal Solid Waste Reduction.
             </p>
             <div className="space-y-1.5 text-xs text-gray-400">
               <div className="flex items-center gap-1.5">
@@ -117,7 +201,7 @@ export const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNav
 
         {/* Bottom Credits & Disclaimer */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
-          <p>© 2026 CircuBuild. Academic EDI Project - Sustainable Construction Technology.</p>
+          <p>© 2026 MatLink Pune. Academic EDI Project - Sustainable Construction Technology.</p>
           <div className="flex items-center gap-4 text-[11px]">
             <button onClick={() => onNavigate('about')} className="hover:text-white">
               About Project

@@ -42,6 +42,7 @@ export const MaterialDetails: React.FC<MaterialDetailsProps> = ({ materialId, on
   const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [requestSuccess, setRequestSuccess] = useState(false);
+  const [requestError, setRequestError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadData() {
@@ -87,12 +88,17 @@ export const MaterialDetails: React.FC<MaterialDetailsProps> = ({ materialId, on
     );
   }
 
-  const savingsPercent = Math.round(
-    ((material.original_market_price - material.selling_price) / material.original_market_price) * 100
-  );
+  const hasRetailComparison =
+    material.original_market_price > material.selling_price && material.selling_price > 0;
+  const savingsPercent = hasRetailComparison
+    ? Math.round(
+        ((material.original_market_price - material.selling_price) / material.original_market_price) *
+          100
+      )
+    : 0;
   const totalOfferedPrice = requestQty * material.selling_price;
   const totalMarketPrice = requestQty * material.original_market_price;
-  const totalSavings = totalMarketPrice - totalOfferedPrice;
+  const totalSavings = Math.max(0, totalMarketPrice - totalOfferedPrice);
 
   const handleSendPurchaseRequest = async () => {
     if (!user) {
@@ -100,8 +106,9 @@ export const MaterialDetails: React.FC<MaterialDetailsProps> = ({ materialId, on
       return;
     }
 
+    setRequestError(null);
     if (requestQty <= 0 || requestQty > material.available_quantity) {
-      alert(`Please enter a quantity between 1 and ${material.available_quantity}`);
+      setRequestError(`Please enter a quantity between 1 and ${material.available_quantity}.`);
       return;
     }
 
@@ -131,7 +138,7 @@ export const MaterialDetails: React.FC<MaterialDetailsProps> = ({ materialId, on
         onNavigate('buyer');
       }, 1800);
     } catch (err: any) {
-      alert(err.message || 'Failed to submit purchase request');
+      setRequestError(err.message || 'Failed to submit purchase request.');
     } finally {
       setSubmitting(false);
     }
@@ -161,9 +168,11 @@ export const MaterialDetails: React.FC<MaterialDetailsProps> = ({ materialId, on
             <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-[#7561A8] text-white shadow-xs">
               {material.category}
             </span>
-            <span className="absolute bottom-3 right-3 px-3 py-1 rounded-md text-xs font-bold bg-emerald-600 text-white shadow-xs">
-              {savingsPercent}% DISCOUNT
-            </span>
+            {hasRetailComparison && (
+              <span className="absolute bottom-3 right-3 px-3 py-1 rounded-md text-xs font-bold bg-emerald-600 text-white shadow-xs">
+                {savingsPercent}% DISCOUNT
+              </span>
+            )}
           </div>
 
           {/* Thumbnails */}
@@ -228,24 +237,26 @@ export const MaterialDetails: React.FC<MaterialDetailsProps> = ({ materialId, on
             {/* Pricing Box */}
             <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-50/80 to-sky-50/80 border border-purple-100 flex flex-wrap items-baseline justify-between gap-4">
               <div>
-                <span className="text-xs text-[#8B8D98] block">Discounted Platform Price</span>
+                <span className="text-xs text-[#8B8D98] block">Seller Asking Price</span>
                 <div className="flex items-baseline gap-1.5 mt-0.5">
-                  <span className="text-3xl font-black text-[#252536]">
+                  <span className="text-3xl font-black text-[#252536] tabular-nums">
                     ₹{material.selling_price.toLocaleString('en-IN')}
                   </span>
                   <span className="text-xs text-[#8B8D98]">per {material.unit}</span>
                 </div>
               </div>
 
-              <div className="text-right">
-                <span className="text-xs text-[#8B8D98] block">Standard Market Price</span>
-                <span className="text-sm line-through text-gray-400 font-semibold">
-                  ₹{material.original_market_price.toLocaleString('en-IN')}
-                </span>
-                <span className="block text-xs font-bold text-emerald-700">
-                  Save ₹{(material.original_market_price - material.selling_price).toLocaleString('en-IN')} ({savingsPercent}%)
-                </span>
-              </div>
+              {hasRetailComparison && (
+                <div className="text-right">
+                  <span className="text-xs text-[#8B8D98] block">Standard Retail Reference</span>
+                  <span className="text-sm line-through text-gray-400 font-semibold tabular-nums">
+                    ₹{material.original_market_price.toLocaleString('en-IN')}
+                  </span>
+                  <span className="block text-xs font-bold text-emerald-700 tabular-nums">
+                    Save ₹{(material.original_market_price - material.selling_price).toLocaleString('en-IN')} ({savingsPercent}%)
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Description */}
@@ -426,19 +437,30 @@ export const MaterialDetails: React.FC<MaterialDetailsProps> = ({ materialId, on
 
                 {/* Financial Summary */}
                 <div className="p-4 rounded-xl bg-purple-50/70 border border-purple-100 space-y-2 text-xs">
-                  <div className="flex justify-between text-[#8B8D98]">
-                    <span>Market Value:</span>
-                    <span className="line-through">₹{totalMarketPrice.toLocaleString('en-IN')}</span>
-                  </div>
+                  {hasRetailComparison && (
+                    <div className="flex justify-between text-[#8B8D98]">
+                      <span>Retail Value:</span>
+                      <span className="line-through tabular-nums">₹{totalMarketPrice.toLocaleString('en-IN')}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between font-bold text-[#252536] text-sm">
-                    <span>Your Total Price ({requestQty} {material.unit}):</span>
-                    <span className="text-[#7561A8]">₹{totalOfferedPrice.toLocaleString('en-IN')}</span>
+                    <span>Total Price ({requestQty} {material.unit}):</span>
+                    <span className="text-[#7561A8] tabular-nums">₹{totalOfferedPrice.toLocaleString('en-IN')}</span>
                   </div>
-                  <div className="flex justify-between text-emerald-700 font-semibold pt-1 border-t border-purple-200">
-                    <span>Estimated Money Saved:</span>
-                    <span>₹{totalSavings.toLocaleString('en-IN')} ({savingsPercent}%)</span>
-                  </div>
+                  {hasRetailComparison && (
+                    <div className="flex justify-between text-emerald-700 font-semibold pt-1 border-t border-purple-200">
+                      <span>Estimated Money Saved:</span>
+                      <span className="tabular-nums">₹{totalSavings.toLocaleString('en-IN')} ({savingsPercent}%)</span>
+                    </div>
+                  )}
                 </div>
+
+                {requestError && (
+                  <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
+                    <span>{requestError}</span>
+                  </div>
+                )}
 
                 {/* Action Buttons */}
                 <div className="flex items-center gap-3 pt-2">

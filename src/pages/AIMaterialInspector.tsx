@@ -95,15 +95,26 @@ export const AIMaterialInspector: React.FC<AIMaterialInspectorProps> = ({ onNavi
         }),
       });
 
-      if (!response.ok) {
-        throw new Error(`Server returned HTTP ${response.status}`);
+      const rawText = await response.text();
+      let data: MaterialInspectionResult & { error?: string };
+      try {
+        data = rawText ? JSON.parse(rawText) : {};
+      } catch {
+        throw new Error(
+          rawText.trim().startsWith('<')
+            ? 'Inspection service returned HTML instead of JSON.'
+            : 'Inspection service returned an invalid response.'
+        );
       }
 
-      const data: MaterialInspectionResult = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.error || `Server returned HTTP ${response.status}`);
+      }
+
       setInspectionResult(data);
     } catch (err: any) {
       console.error('Inspection error:', err);
-      setErrorMsg('Failed to process image inspection. Please check your photo and try again.');
+      setErrorMsg(err?.message || 'Failed to process image inspection. Please check your photo and try again.');
     } finally {
       setLoading(false);
       setTimeout(() => setActiveScanPulse(false), 800);

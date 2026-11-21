@@ -27,27 +27,31 @@ export const BuyerDashboard: React.FC<BuyerDashboardProps> = ({ onNavigate }) =>
   const [recommendedMaterials, setRecommendedMaterials] = useState<MaterialListing[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const loadData = async (silent = false) => {
+    if (!silent) setLoading(true);
+    const allReqs = await db.getPurchaseRequests();
+    const myReqs = allReqs.filter(
+      (r) => r.buyer_id === user?.id || user?.user_type === 'both' || user?.user_type === 'buyer'
+    );
+    setRequests(myReqs);
+
+    const allTxs = await db.getTransactions();
+    const myTxs = allTxs.filter(
+      (t) => t.buyer_id === user?.id || user?.user_type === 'both' || user?.user_type === 'buyer'
+    );
+    setTransactions(myTxs);
+
+    const allMats = await db.getMaterials();
+    setRecommendedMaterials(allMats.filter((m) => m.status === 'available').slice(0, 3));
+    if (!silent) setLoading(false);
+  };
+
   useEffect(() => {
-    async function loadData() {
-      setLoading(true);
-      const allReqs = await db.getPurchaseRequests();
-      // Show user's requests or default buyer requests
-      const myReqs = allReqs.filter(
-        (r) => r.buyer_id === user?.id || user?.user_type === 'both' || user?.user_type === 'buyer'
-      );
-      setRequests(myReqs);
-
-      const allTxs = await db.getTransactions();
-      const myTxs = allTxs.filter(
-        (t) => t.buyer_id === user?.id || user?.user_type === 'both' || user?.user_type === 'buyer'
-      );
-      setTransactions(myTxs);
-
-      const allMats = await db.getMaterials();
-      setRecommendedMaterials(allMats.filter((m) => m.status === 'available').slice(0, 3));
-      setLoading(false);
-    }
-    loadData();
+    loadData(false);
+    const unsubscribe = db.subscribeToMaterials(() => {
+      loadData(true);
+    });
+    return unsubscribe;
   }, [user]);
 
   const pendingCount = requests.filter((r) => r.status === 'pending').length;

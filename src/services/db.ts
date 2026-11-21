@@ -104,11 +104,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5913,
     longitude: 73.6983,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_patil',
     contact_person: 'Rajesh Patil',
     contact_phone: '+91 98220 11442',
-    total_listings_count: 3,
+    total_listings_count: 0,
   },
   {
     id: 'site_kharadi',
@@ -119,11 +119,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5514,
     longitude: 73.9535,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_kulkarni',
     contact_person: 'Amit Kulkarni',
     contact_phone: '+91 94223 99881',
-    total_listings_count: 2,
+    total_listings_count: 0,
   },
   {
     id: 'site_wakad',
@@ -134,11 +134,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5987,
     longitude: 73.7629,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_shinde',
     contact_person: 'Vikram Shinde',
     contact_phone: '+91 98901 23456',
-    total_listings_count: 2,
+    total_listings_count: 0,
   },
   {
     id: 'site_baner',
@@ -153,7 +153,7 @@ const INITIAL_SITES: ConstructionSite[] = [
     seller_id: 'usr_patil',
     contact_person: 'Rajesh Patil',
     contact_phone: '+91 98220 11442',
-    total_listings_count: 1,
+    total_listings_count: 0,
   },
   {
     id: 'site_kothrud',
@@ -164,11 +164,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5074,
     longitude: 73.8077,
-    status: 'reused_completed',
+    status: 'active',
     seller_id: 'usr_kulkarni',
     contact_person: 'Manoj Gaikwad',
     contact_phone: '+91 98230 44551',
-    total_listings_count: 1,
+    total_listings_count: 0,
   },
   {
     id: 'site_viman_nagar',
@@ -179,11 +179,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5679,
     longitude: 73.9143,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_kulkarni',
     contact_person: 'Amit Kulkarni',
     contact_phone: '+91 94223 99881',
-    total_listings_count: 1,
+    total_listings_count: 0,
   },
   {
     id: 'site_pimpri',
@@ -194,11 +194,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.6279,
     longitude: 73.8009,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_shinde',
     contact_person: 'Vikram Shinde',
     contact_phone: '+91 98901 23456',
-    total_listings_count: 1,
+    total_listings_count: 0,
   },
   {
     id: 'site_hadapsar',
@@ -209,7 +209,7 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5089,
     longitude: 73.9260,
-    status: 'reused_completed',
+    status: 'active',
     seller_id: 'usr_patil',
     contact_person: 'Vinayak Pawar',
     contact_phone: '+91 98221 66554',
@@ -224,11 +224,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5756,
     longitude: 73.7707,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_kulkarni',
     contact_person: 'Amit Kulkarni',
     contact_phone: '+91 94223 99881',
-    total_listings_count: 2,
+    total_listings_count: 0,
   },
   {
     id: 'site_magarpatta',
@@ -239,11 +239,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5147,
     longitude: 73.9298,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_patil',
     contact_person: 'Rajesh Patil',
     contact_phone: '+91 98220 11442',
-    total_listings_count: 2,
+    total_listings_count: 0,
   },
   {
     id: 'site_ravet',
@@ -254,11 +254,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.6477,
     longitude: 73.7431,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_shinde',
     contact_person: 'Vikram Shinde',
     contact_phone: '+91 98901 23456',
-    total_listings_count: 2,
+    total_listings_count: 0,
   },
   {
     id: 'site_chakan',
@@ -269,11 +269,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.7583,
     longitude: 73.8569,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_shinde',
     contact_person: 'Vikram Shinde',
     contact_phone: '+91 98901 23456',
-    total_listings_count: 2,
+    total_listings_count: 0,
   },
   {
     id: 'site_bavdhan',
@@ -284,11 +284,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5126,
     longitude: 73.7744,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_patil',
     contact_person: 'Vinayak Pawar',
     contact_phone: '+91 98221 66554',
-    total_listings_count: 2,
+    total_listings_count: 0,
   },
   {
     id: 'site_kalyani_nagar',
@@ -299,11 +299,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5463,
     longitude: 73.9034,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_kulkarni',
     contact_person: 'Amit Kulkarni',
     contact_phone: '+91 94223 99881',
-    total_listings_count: 2,
+    total_listings_count: 0,
   },
   {
     id: 'site_moshi',
@@ -314,11 +314,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.6791,
     longitude: 73.8447,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_shinde',
     contact_person: 'Vikram Shinde',
     contact_phone: '+91 98901 23456',
-    total_listings_count: 1,
+    total_listings_count: 0,
   },
   {
     id: 'site_aundh',
@@ -329,11 +329,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5580,
     longitude: 73.8073,
-    status: 'reused_completed',
+    status: 'active',
     seller_id: 'usr_patil',
     contact_person: 'Rajesh Patil',
     contact_phone: '+91 98220 11442',
-    total_listings_count: 1,
+    total_listings_count: 0,
   },
   {
     id: 'site_wagholi',
@@ -344,11 +344,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5808,
     longitude: 73.9812,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_shinde',
     contact_person: 'Vikram Shinde',
     contact_phone: '+91 98901 23456',
-    total_listings_count: 2,
+    total_listings_count: 0,
   },
   {
     id: 'site_undri',
@@ -359,11 +359,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.4618,
     longitude: 73.9082,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_patil',
     contact_person: 'Rajesh Patil',
     contact_phone: '+91 98220 11442',
-    total_listings_count: 1,
+    total_listings_count: 0,
   },
   {
     id: 'site_sb_road',
@@ -374,11 +374,11 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5314,
     longitude: 73.8298,
-    status: 'reused_completed',
+    status: 'active',
     seller_id: 'usr_kulkarni',
     contact_person: 'Manoj Gaikwad',
     contact_phone: '+91 98230 44551',
-    total_listings_count: 1,
+    total_listings_count: 0,
   },
   {
     id: 'site_swargate',
@@ -389,808 +389,169 @@ const INITIAL_SITES: ConstructionSite[] = [
     city: 'Pune',
     latitude: 18.5018,
     longitude: 73.8586,
-    status: 'materials_available',
+    status: 'active',
     seller_id: 'usr_kulkarni',
     contact_person: 'Amit Kulkarni',
     contact_phone: '+91 94223 99881',
-    total_listings_count: 2,
+    total_listings_count: 0,
   },
 ];
 
+// Two minimal starter materials shown in Buyer Marketplace alongside live seller uploads
 const INITIAL_MATERIALS: MaterialListing[] = [
   {
-    id: 'mat_cement_hinj',
-    seller_id: 'usr_patil',
-    seller_name: 'Rajesh Patil',
-    seller_phone: '+91 98220 11442',
-    seller_company: 'Kumar Properties Pune',
-    site_id: 'site_hinjawadi',
-    site_name: 'Hinjawadi IT Park Phase 3 Commercial Tower',
-    title: 'Surplus OPC 53 Grade UltraTech Cement Bags',
-    category: 'Cement',
-    description: 'Factory-sealed surplus cement bags stored indoors on dry elevated wooden pallets. Manufactured within the last 4 weeks. Moisture tested, excellent free-flowing powder suitable for structural slabs and masonry.',
-    available_quantity: 350,
-    original_quantity: 500,
-    unit: 'Bags',
-    original_market_price: 410,
-    selling_price: 275,
-    condition: 'Excellent',
-    status: 'available',
-    location_name: 'Hinjawadi Phase 3, Pune',
-    latitude: 18.5913,
-    longitude: 73.6983,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Packaging intact, crisp manufacturer stamp, zero humidity clumping detected. Dry storage conditions confirmed.',
-    images: [
-      'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1541888946425-d0fbb186156f?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-10-25T14:20:00Z',
-  },
-  {
-    id: 'mat_steel_hinj',
-    seller_id: 'usr_patil',
-    seller_name: 'Rajesh Patil',
-    seller_phone: '+91 98220 11442',
-    seller_company: 'Kumar Properties Pune',
-    site_id: 'site_hinjawadi',
-    site_name: 'Hinjawadi IT Park Phase 3 Commercial Tower',
-    title: 'Tata Tiscon Fe 550D TMT Steel Rebars (12mm & 16mm)',
-    category: 'Steel',
-    description: 'Primary structural grade steel offcuts from foundation and shear wall layout. Bundled in straight lengths (4m to 6m). Minimal light atmospheric dust, stored elevated under waterproof tarpaulins.',
-    available_quantity: 8.5,
-    original_quantity: 12,
-    unit: 'Tons',
-    original_market_price: 68000,
-    selling_price: 48000,
-    condition: 'Good',
-    status: 'available',
-    location_name: 'Hinjawadi Phase 3, Pune',
-    latitude: 18.5913,
-    longitude: 73.6983,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Rib patterns intact, zero deep pitting or cross-section loss. Minor surface oxidation easily wire-brushed.',
-    images: [
-      'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-10-27T09:15:00Z',
-  },
-  {
-    id: 'mat_bricks_kharadi',
+    id: 'mat_starter_bricks',
     seller_id: 'usr_kulkarni',
     seller_name: 'Amit Kulkarni',
     seller_phone: '+91 94223 99881',
     seller_company: 'Rohan Builders & Infra',
     site_id: 'site_kharadi',
     site_name: 'Kharadi EON Gateway Towers',
-    title: 'Kiln-Fired Wire-Cut Red Clay Facade Bricks',
+    title: 'High-Density Red Clay Wire-Cut Bricks',
     category: 'Bricks',
-    description: 'Surplus chamber-kiln burnt red clay bricks from external facade walling. Sharp edges, uniform deep terracotta hue, high compressive load capacity.',
+    description:
+      'Surplus chamber-kiln burnt red clay bricks stacked cleanly on site. Sharp corners and consistent firing quality.',
     available_quantity: 4200,
-    original_quantity: 6000,
+    original_quantity: 4200,
     unit: 'Pieces',
-    original_market_price: 11.5,
-    selling_price: 7.2,
+    original_market_price: 7,
+    selling_price: 7,
     condition: 'Excellent',
     status: 'available',
-    location_name: 'Kharadi Bypass Rd, Pune',
+    location_name: 'Kharadi Bypass, Pune',
     latitude: 18.5514,
     longitude: 73.9535,
     ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Uniform edge sharpness, no spalling or thermal fracture cracks detected across visible pallet stack.',
-    images: [
-      'https://images.unsplash.com/photo-1584463699026-6a978f8cb64c?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1590069261209-f8e9b8642343?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-10-28T11:45:00Z',
+    ai_inspection_notes: 'Sharp corners, consistent firing color, minimal chipping.',
+    images: ['https://images.unsplash.com/photo-1584463699026-6a978f8cb64c?w=800&auto=format&fit=crop&q=80'],
+    created_at: '2026-10-15T10:00:00Z',
   },
   {
-    id: 'mat_tiles_kharadi',
-    seller_id: 'usr_kulkarni',
-    seller_name: 'Amit Kulkarni',
-    seller_phone: '+91 94223 99881',
-    seller_company: 'Rohan Builders & Infra',
-    site_id: 'site_kharadi',
-    site_name: 'Kharadi EON Gateway Towers',
-    title: 'Kajaria Double-Charge Vitrified Floor Tiles (600x1200mm)',
-    category: 'Tiles',
-    description: 'Factory-sealed original boxes of premium ivory gloss vitrified tiles. Perfect for commercial lobbies, residential living rooms, or office spaces.',
-    available_quantity: 850,
-    original_quantity: 1000,
-    unit: 'Sq. Ft',
-    original_market_price: 85,
-    selling_price: 48,
-    condition: 'Excellent',
-    status: 'available',
-    location_name: 'Kharadi Bypass Rd, Pune',
-    latitude: 18.5514,
-    longitude: 73.9535,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Corner guard protectors intact, zero box crushing, high specular reflection on random sample.',
-    images: [
-      'https://images.unsplash.com/photo-1581404476143-fb31d742929f?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-10-29T16:00:00Z',
-  },
-  {
-    id: 'mat_sand_wakad',
-    seller_id: 'usr_shinde',
-    seller_name: 'Vikram Shinde',
-    seller_phone: '+91 98901 23456',
-    seller_company: 'Shinde Infrastructure Ltd',
-    site_id: 'site_wakad',
-    site_name: 'Wakad Green Valley Heights',
-    title: 'Screened & Washed Coarse River Sand for Plastering',
-    category: 'Sand',
-    description: 'Clean screened river sand with less than 3% silt content. Sourced directly for high-finish internal wall plastering. Ready for immediate tipper loading.',
-    available_quantity: 4,
-    original_quantity: 6,
-    unit: 'Truckloads',
-    original_market_price: 18500,
-    selling_price: 12000,
-    condition: 'Good',
-    status: 'available',
-    location_name: 'Wakad Datta Mandir Rd, Pune',
-    latitude: 18.5987,
-    longitude: 73.7629,
-    ai_inspected: false,
-    images: [
-      'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-10-30T10:30:00Z',
-  },
-  {
-    id: 'mat_pipes_wakad',
-    seller_id: 'usr_shinde',
-    seller_name: 'Vikram Shinde',
-    seller_phone: '+91 98901 23456',
-    seller_company: 'Shinde Infrastructure Ltd',
-    site_id: 'site_wakad',
-    site_name: 'Wakad Green Valley Heights',
-    title: 'Astral Heavy-Duty CPVC & UPVC Pressure Pipes (1" & 1.5")',
-    category: 'Pipes',
-    description: 'Schedule 80 and SDR 11 cold/hot water plumbing lines. Unused excess from residential plumbing riser installation. Includes brass threaded elbows and joiners.',
-    available_quantity: 120,
-    original_quantity: 150,
-    unit: 'Pieces',
-    original_market_price: 450,
-    selling_price: 260,
-    condition: 'Good',
-    status: 'available',
-    location_name: 'Wakad Datta Mandir Rd, Pune',
-    latitude: 18.5987,
-    longitude: 73.7629,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: No UV chalking or microcracks. Pipe bevels clean and circular.',
-    images: [
-      'https://images.unsplash.com/photo-1542013936693-884638332954?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-01T12:00:00Z',
-  },
-  {
-    id: 'mat_wood_baner',
+    id: 'mat_starter_tiles',
     seller_id: 'usr_patil',
     seller_name: 'Rajesh Patil',
     seller_phone: '+91 98220 11442',
     seller_company: 'Kumar Properties Pune',
     site_id: 'site_baner',
     site_name: 'Baner High Street Commercial Hub',
-    title: '18mm Film-Faced Marine Shuttering Plywood Planks',
-    category: 'Wooden Materials',
-    description: 'Heavy duty shuttering boards used only once during slab pour. Fully scraped, cleaned, oiled, and stacked dry. Highly reusable for 5+ additional cycles.',
-    available_quantity: 95,
-    original_quantity: 120,
-    unit: 'Pieces',
-    original_market_price: 1600,
-    selling_price: 850,
-    condition: 'Good',
+    title: 'Vitrified Double Charge Floor Tiles (600x1200mm)',
+    category: 'Tiles',
+    description:
+      'Unopened original boxes of ivory gloss vitrified floor tiles remaining after lobby completion.',
+    available_quantity: 850,
+    original_quantity: 850,
+    unit: 'Sq. Ft',
+    original_market_price: 48,
+    selling_price: 48,
+    condition: 'Excellent',
     status: 'available',
     location_name: 'Baner High Street, Pune',
-    latitude: 18.5590,
+    latitude: 18.559,
     longitude: 73.7868,
     ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Negligible core edge delamination. 90% smooth polymer coating intact.',
-    images: [
-      'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-02T15:20:00Z',
-  },
-  {
-    id: 'mat_electrical_viman',
-    seller_id: 'usr_kulkarni',
-    seller_name: 'Amit Kulkarni',
-    seller_phone: '+91 94223 99881',
-    seller_company: 'Rohan Builders & Infra',
-    site_id: 'site_viman_nagar',
-    site_name: 'Viman Nagar Aeromall Extension',
-    title: 'Polycab 4-Core FRLS Copper Armoured Power Cables',
-    category: 'Electrical Materials',
-    description: 'Surplus drum lengths of multi-strand 4 sq mm copper armoured power cables. ISI marked, unopened plastic wrap on drum flange.',
-    available_quantity: 600,
-    original_quantity: 800,
-    unit: 'Meters',
-    original_market_price: 92,
-    selling_price: 58,
-    condition: 'Excellent',
-    status: 'available',
-    location_name: 'Viman Nagar, Pune',
-    latitude: 18.5679,
-    longitude: 73.9143,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Lead seals undisturbed, outer PVC jacket intact without cuts or scuffs.',
-    images: [
-      'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-03T17:10:00Z',
-  },
-  {
-    id: 'mat_paint_pimpri',
-    seller_id: 'usr_shinde',
-    seller_name: 'Vikram Shinde',
-    seller_phone: '+91 98901 23456',
-    seller_company: 'Shinde Infrastructure Ltd',
-    site_id: 'site_pimpri',
-    site_name: 'Pimpri Auto Cluster Mega Logistics Shed',
-    title: 'Asian Paints Apex Ultima Weatherproof Exterior Paint (20L Buckets)',
-    category: 'Paint',
-    description: 'Sealed factory 20-liter buckets in Off-White and Warm Sand. Superior anti-algal protection, purchased 2 months ago for industrial facade.',
-    available_quantity: 18,
-    original_quantity: 25,
-    unit: 'Units',
-    original_market_price: 4800,
-    selling_price: 3100,
-    condition: 'Excellent',
-    status: 'available',
-    location_name: 'Pimpri Industrial Hub, Pune',
-    latitude: 18.6279,
-    longitude: 73.8009,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Tamper-evident bucket seals intact; zero lid leakage.',
-    images: [
-      'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-04T09:40:00Z',
-  },
-  {
-    id: 'mat_granite_hinj',
-    seller_id: 'usr_patil',
-    seller_name: 'Rajesh Patil',
-    seller_phone: '+91 98220 11442',
-    seller_company: 'Kumar Properties Pune',
-    site_id: 'site_hinjawadi',
-    site_name: 'Hinjawadi IT Park Phase 3 Commercial Tower',
-    title: 'Polished Jet Black Granite Slabs (Kitchen & Tread Width)',
-    category: 'Stone',
-    description: 'High-density mirror-finish black granite slabs with chamfered safe edges. Uniform coloration without natural quartz fissures.',
-    available_quantity: 320,
-    original_quantity: 450,
-    unit: 'Sq. Ft',
-    original_market_price: 160,
-    selling_price: 95,
-    condition: 'Good',
-    status: 'available',
-    location_name: 'Hinjawadi Phase 3, Pune',
-    latitude: 18.5913,
-    longitude: 73.6983,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Mirror reflectance verified; no corner chips.',
-    images: [
-      'https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-05T13:30:00Z',
-  },
-  {
-    id: 'mat_steel_balewadi',
-    seller_id: 'usr_kulkarni',
-    seller_name: 'Amit Kulkarni',
-    seller_phone: '+91 94223 99881',
-    seller_company: 'Rohan Builders & Infra',
-    site_id: 'site_balewadi',
-    site_name: 'Balewadi Smart Sports Arena & Commercial Boulevard',
-    title: 'Heavy Structural MS Hollow Box Sections (100x100mm)',
-    category: 'Steel',
-    description: 'Surplus square hollow structural columns leftover from stadium roof canopy truss fabrication. Primer coated, zero bending distortion, ready for immediate erection.',
-    available_quantity: 4.8,
-    original_quantity: 7.5,
-    unit: 'Tons',
-    original_market_price: 72000,
-    selling_price: 51000,
-    condition: 'Excellent',
-    status: 'available',
-    location_name: 'Balewadi High St, Pune',
-    latitude: 18.5756,
-    longitude: 73.7707,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Protective zinc-chromate primer intact; straight profile verified.',
-    images: [
-      'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-06T10:15:00Z',
-  },
-  {
-    id: 'mat_stone_magarpatta',
-    seller_id: 'usr_patil',
-    seller_name: 'Rajesh Patil',
-    seller_phone: '+91 98220 11442',
-    seller_company: 'Kumar Properties Pune',
-    site_id: 'site_magarpatta',
-    site_name: 'Magarpatta Cybercity IT Tower 16 Expansion',
-    title: 'Natural Dholpur Beige Sandstone Paving Flagstones',
-    category: 'Stone',
-    description: 'Hand-chiseled calibrated sandstone tiles (600x600x30mm) for commercial landscaped walkways and patio driveways. Non-slip natural texture, zero breakages.',
-    available_quantity: 1200,
-    original_quantity: 1800,
-    unit: 'Sq. Ft',
-    original_market_price: 110,
-    selling_price: 65,
-    condition: 'Excellent',
-    status: 'available',
-    location_name: 'Magarpatta City, Pune',
-    latitude: 18.5147,
-    longitude: 73.9298,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Uniform calibrated thickness; edges crisp without impact spalling.',
-    images: [
-      'https://images.unsplash.com/photo-1584463699026-6a978f8cb64c?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-06T14:40:00Z',
-  },
-  {
-    id: 'mat_blocks_ravet',
-    seller_id: 'usr_shinde',
-    seller_name: 'Vikram Shinde',
-    seller_phone: '+91 98901 23456',
-    seller_company: 'Shinde Infrastructure Ltd',
-    site_id: 'site_ravet',
-    site_name: 'Ravet Expressway Gateway Twin Towers',
-    title: 'High-Density Steam-Cured Fly Ash Masonry Blocks',
-    category: 'Bricks',
-    description: 'Autoclaved high-strength masonry blocks (200x150x100mm). Excellent thermal insulation and dimensional accuracy. Leftover from residential partition walling.',
-    available_quantity: 3600,
-    original_quantity: 5000,
-    unit: 'Pieces',
-    original_market_price: 38,
-    selling_price: 24,
-    condition: 'Excellent',
-    status: 'available',
-    location_name: 'Ravet BRTS Corridor, Pune',
-    latitude: 18.6477,
-    longitude: 73.7431,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Precise square edges, no core crumbling or moisture stains.',
-    images: [
-      'https://images.unsplash.com/photo-1590069261209-f8e9b8642343?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-06T16:20:00Z',
-  },
-  {
-    id: 'mat_roofing_chakan',
-    seller_id: 'usr_shinde',
-    seller_name: 'Vikram Shinde',
-    seller_phone: '+91 98901 23456',
-    seller_company: 'Shinde Infrastructure Ltd',
-    site_id: 'site_chakan',
-    site_name: 'Chakan Industrial Logistics Mega Shed Phase 2',
-    title: 'Color-Coated Galvanized Trapezoidal Roofing Sheets',
-    category: 'Other Construction Materials',
-    description: '0.50mm BMT Tata Colorbond sheets in Castle Blue (6m and 8m lengths). Unused excess from warehouse roof deck installation. Includes self-tapping sealing screws.',
-    available_quantity: 85,
-    original_quantity: 120,
-    unit: 'Pieces',
-    original_market_price: 1850,
-    selling_price: 1100,
-    condition: 'Good',
-    status: 'available',
-    location_name: 'Chakan MIDC Phase 2, Pune',
-    latitude: 18.7583,
-    longitude: 73.8569,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Organic polyester coat intact; no scratch lines or edge corrosion.',
-    images: [
-      'https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-07T09:10:00Z',
-  },
-  {
-    id: 'mat_doors_bavdhan',
-    seller_id: 'usr_patil',
-    seller_name: 'Rajesh Patil',
-    seller_phone: '+91 98220 11442',
-    seller_company: 'Kumar Properties Pune',
-    site_id: 'site_bavdhan',
-    site_name: 'Bavdhan Nature Crest Eco-Residences',
-    title: 'Pre-Finished Solid Core Flush Doors & Teak Frames',
-    category: 'Doors and Windows',
-    description: 'Waterproof BWR commercial flush doors (32mm thickness, 7ft x 3ft) with natural Burma teak border mouldings. Packaged with protective plastic film.',
-    available_quantity: 28,
-    original_quantity: 40,
-    unit: 'Units',
-    original_market_price: 5200,
-    selling_price: 3200,
-    condition: 'Excellent',
-    status: 'available',
-    location_name: 'Bavdhan Khurd, Pune',
-    latitude: 18.5126,
-    longitude: 73.7744,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Straight stile edges, no warp deflection, shrink-wrap factory seal intact.',
-    images: [
-      'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-07T11:30:00Z',
-  },
-  {
-    id: 'mat_pipes_moshi',
-    seller_id: 'usr_shinde',
-    seller_name: 'Vikram Shinde',
-    seller_phone: '+91 98901 23456',
-    seller_company: 'Shinde Infrastructure Ltd',
-    site_id: 'site_moshi',
-    site_name: 'Moshi PCMC International Convention Corridor',
-    title: 'NP3 Class Spun Reinforced Concrete Culvert Pipes (600mm)',
-    category: 'Pipes',
-    description: 'IS 458 compliant heavy duty RCC storm drain pipes with socket and spigot ends. Stored on level ground, zero fractures.',
-    available_quantity: 45,
-    original_quantity: 60,
-    unit: 'Pieces',
-    original_market_price: 3200,
-    selling_price: 1950,
-    condition: 'Good',
-    status: 'available',
-    location_name: 'Moshi Pradhikaran, Pune',
-    latitude: 18.6791,
-    longitude: 73.8447,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Concrete collar rings intact; internal barrel surface smooth.',
-    images: [
-      'https://images.unsplash.com/photo-1542013936693-884638332954?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-07T14:00:00Z',
-  },
-  {
-    id: 'mat_tiles_kalyani',
-    seller_id: 'usr_kulkarni',
-    seller_name: 'Amit Kulkarni',
-    seller_phone: '+91 94223 99881',
-    seller_company: 'Rohan Builders & Infra',
-    site_id: 'site_kalyani_nagar',
-    site_name: 'Kalyani Nagar Riverside Commercial Plaza',
-    title: 'Armstrong Fine Fissured Acoustic Ceiling Tiles (600x600mm)',
-    category: 'Tiles',
-    description: 'Mineral fiber suspended ceiling boards with square lay-in edges. Unopened original cartons stored in air-conditioned storage.',
-    available_quantity: 1400,
-    original_quantity: 2000,
-    unit: 'Sq. Ft',
-    original_market_price: 68,
-    selling_price: 39,
-    condition: 'Excellent',
-    status: 'available',
-    location_name: 'Kalyani Nagar, Pune',
-    latitude: 18.5463,
-    longitude: 73.9034,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Zero carton corner crushing, dry pristine condition.',
-    images: [
-      'https://images.unsplash.com/photo-1581404476143-fb31d742929f?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-07T15:45:00Z',
-  },
-  {
-    id: 'mat_paint_wagholi',
-    seller_id: 'usr_shinde',
-    seller_name: 'Vikram Shinde',
-    seller_phone: '+91 98901 23456',
-    seller_company: 'Shinde Infrastructure Ltd',
-    site_id: 'site_wagholi',
-    site_name: 'Wagholi IT-Corridor Green Township',
-    title: 'Berger WeatherCoat Anti-Dust Exterior Acrylic (20L Pails)',
-    category: 'Paint',
-    description: 'Dust-repellent exterior emulsion with silicon technology. Shaded in Frost White and Pearl Grey. Manufacturer seals untouched.',
-    available_quantity: 22,
-    original_quantity: 30,
-    unit: 'Units',
-    original_market_price: 4950,
-    selling_price: 3200,
-    condition: 'Excellent',
-    status: 'available',
-    location_name: 'Wagholi Pune-Nagar Rd, Pune',
-    latitude: 18.5808,
-    longitude: 73.9812,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Unopened rim clips verified, fresh production run.',
-    images: [
-      'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-07T17:15:00Z',
-  },
-  {
-    id: 'mat_aggregate_undri',
-    seller_id: 'usr_patil',
-    seller_name: 'Rajesh Patil',
-    seller_phone: '+91 98220 11442',
-    seller_company: 'Kumar Properties Pune',
-    site_id: 'site_undri',
-    site_name: 'Undri - Pisoli Forest Hills Residential Estate',
-    title: 'VSI Manufactured Sand (M-Sand) Zone II for Concrete',
-    category: 'Sand',
-    description: 'Cubical-shaped VSI sand manufactured from virgin basalt rock. Washed and free from clay lumps. Ready for immediate tipper collection.',
-    available_quantity: 6,
-    original_quantity: 8,
-    unit: 'Truckloads',
-    original_market_price: 16500,
-    selling_price: 10500,
-    condition: 'Excellent',
-    status: 'available',
-    location_name: 'Undri Kad Nagar, Pune',
-    latitude: 18.4618,
-    longitude: 73.9082,
-    ai_inspected: false,
-    images: [
-      'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-08T08:00:00Z',
-  },
-  {
-    id: 'mat_electrical_swargate',
-    seller_id: 'usr_kulkarni',
-    seller_name: 'Amit Kulkarni',
-    seller_phone: '+91 94223 99881',
-    seller_company: 'Rohan Builders & Infra',
-    site_id: 'site_swargate',
-    site_name: 'Swargate Multi-Modal Underground Hub',
-    title: 'Schneider & L&T 4-Pole MCCBs & Modular DB Panels',
-    category: 'Electrical Materials',
-    description: '160A and 250A thermal-magnetic trip circuit breakers with IP65 outdoor distribution enclosures. Leftover from commercial substation package.',
-    available_quantity: 16,
-    original_quantity: 20,
-    unit: 'Units',
-    original_market_price: 12500,
-    selling_price: 7800,
-    condition: 'Excellent',
-    status: 'available',
-    location_name: 'Swargate Central Hub, Pune',
-    latitude: 18.5018,
-    longitude: 73.8586,
-    ai_inspected: true,
-    ai_inspection_notes: 'AI Visual Inspector: Unused terminal shrouds, zero flash burns, factory calibration report included.',
-    images: [
-      'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80',
-    ],
-    created_at: '2026-11-08T09:30:00Z',
+    ai_inspection_notes: 'Factory boxes sealed; corner protectors intact.',
+    images: ['https://images.unsplash.com/photo-1581404476143-fb31d742929f?w=800&auto=format&fit=crop&q=80'],
+    created_at: '2026-10-14T10:00:00Z',
   },
 ];
 
-const INITIAL_REQUESTS: PurchaseRequest[] = [
-  {
-    id: 'req_001',
-    material_id: 'mat_cement_hinj',
-    material_title: 'Surplus OPC 53 Grade UltraTech Cement Bags',
-    material_category: 'Cement',
-    material_image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&auto=format&fit=crop&q=80',
-    buyer_id: 'usr_deshmukh',
-    buyer_name: 'Sunita Deshmukh',
-    buyer_email: 'sunita.deshmukh@greenbrick.org',
-    buyer_phone: '+91 99234 55667',
-    seller_id: 'usr_patil',
-    seller_name: 'Rajesh Patil',
-    seller_phone: '+91 98220 11442',
-    requested_quantity: 150,
-    unit: 'Bags',
-    offered_price_per_unit: 275,
-    total_amount: 41250,
-    delivery_preference: 'Self Pickup from Site',
-    message: 'We have 2 flat-bed trucks ready in Hinjawadi for morning loading.',
-    status: 'completed',
-    created_at: '2026-11-03T11:00:00Z',
-  },
-  {
-    id: 'req_002',
-    material_id: 'mat_steel_hinj',
-    material_title: 'Tata Tiscon Fe 550D TMT Steel Rebars (12mm & 16mm)',
-    material_category: 'Steel',
-    material_image: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=800&auto=format&fit=crop&q=80',
-    buyer_id: 'usr_deshmukh',
-    buyer_name: 'Sunita Deshmukh',
-    buyer_email: 'sunita.deshmukh@greenbrick.org',
-    buyer_phone: '+91 99234 55667',
-    seller_id: 'usr_patil',
-    seller_name: 'Rajesh Patil',
-    seller_phone: '+91 98220 11442',
-    requested_quantity: 3.5,
-    unit: 'Tons',
-    offered_price_per_unit: 48000,
-    total_amount: 168000,
-    delivery_preference: 'Site Delivery Required',
-    message: 'Need delivery to our Baner site for basement retaining wall.',
-    status: 'completed',
-    created_at: '2026-10-31T14:30:00Z',
-  },
-  {
-    id: 'req_003',
-    material_id: 'mat_bricks_kharadi',
-    material_title: 'Kiln-Fired Wire-Cut Red Clay Facade Bricks',
-    material_category: 'Bricks',
-    material_image: 'https://images.unsplash.com/photo-1584463699026-6a978f8cb64c?w=800&auto=format&fit=crop&q=80',
-    buyer_id: 'usr_kulkarni',
-    buyer_name: 'Amit Kulkarni',
-    buyer_email: 'amit.kulkarni@rohaninfra.com',
-    buyer_phone: '+91 94223 99881',
-    seller_id: 'usr_kulkarni',
-    seller_name: 'Amit Kulkarni',
-    seller_phone: '+91 94223 99881',
-    requested_quantity: 1800,
-    unit: 'Pieces',
-    offered_price_per_unit: 7.2,
-    total_amount: 12960,
-    delivery_preference: 'Self Pickup from Site',
-    message: 'Pickup scheduled for tomorrow afternoon.',
-    status: 'completed',
-    created_at: '2026-10-24T16:20:00Z',
-  },
-  {
-    id: 'req_004',
-    material_id: 'mat_paint_pimpri',
-    material_title: 'Asian Paints Apex Ultima Weatherproof Exterior Paint (20L Buckets)',
-    material_category: 'Paint',
-    material_image: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=800&auto=format&fit=crop&q=80',
-    buyer_id: 'usr_deshmukh',
-    buyer_name: 'Sunita Deshmukh',
-    buyer_email: 'sunita.deshmukh@greenbrick.org',
-    buyer_phone: '+91 99234 55667',
-    seller_id: 'usr_shinde',
-    seller_name: 'Vikram Shinde',
-    seller_phone: '+91 98901 23456',
-    requested_quantity: 5,
-    unit: 'Units',
-    offered_price_per_unit: 3100,
-    total_amount: 15500,
-    delivery_preference: 'Self Pickup from Site',
-    message: 'Looking to purchase 5 buckets for our Hadapsar boundary wall.',
-    status: 'pending',
-    created_at: '2026-11-07T18:00:00Z',
-  },
-];
+const INITIAL_REQUESTS: PurchaseRequest[] = [];
+const INITIAL_TRANSACTIONS: Transaction[] = [];
+const INITIAL_NOTIFICATIONS: NotificationItem[] = [];
 
-const INITIAL_TRANSACTIONS: Transaction[] = [
-  {
-    id: 'tx_001',
-    purchase_request_id: 'req_001',
-    material_id: 'mat_cement_hinj',
-    material_title: 'Surplus OPC 53 Grade UltraTech Cement Bags',
-    material_category: 'Cement',
-    buyer_id: 'usr_deshmukh',
-    buyer_name: 'Sunita Deshmukh',
-    seller_id: 'usr_patil',
-    seller_name: 'Rajesh Patil',
-    quantity: 150,
-    unit: 'Bags',
-    unit_price: 275,
-    total_price: 41250,
-    market_value: 61500,
-    money_saved: 20250,
-    waste_diverted_kg: 7500,
-    status: 'completed',
-    completion_date: '2026-11-04T12:00:00Z',
-    created_at: '2026-11-03T11:00:00Z',
-  },
-  {
-    id: 'tx_002',
-    purchase_request_id: 'req_002',
-    material_id: 'mat_steel_hinj',
-    material_title: 'Tata Tiscon Fe 550D TMT Steel Rebars (12mm & 16mm)',
-    material_category: 'Steel',
-    buyer_id: 'usr_deshmukh',
-    buyer_name: 'Sunita Deshmukh',
-    seller_id: 'usr_patil',
-    seller_name: 'Rajesh Patil',
-    quantity: 3.5,
-    unit: 'Tons',
-    unit_price: 48000,
-    total_price: 168000,
-    market_value: 238000,
-    money_saved: 70000,
-    waste_diverted_kg: 3500,
-    status: 'completed',
-    completion_date: '2026-11-01T15:00:00Z',
-    created_at: '2026-10-31T14:30:00Z',
-  },
-  {
-    id: 'tx_003',
-    purchase_request_id: 'req_003',
-    material_id: 'mat_bricks_kharadi',
-    material_title: 'Kiln-Fired Wire-Cut Red Clay Facade Bricks',
-    material_category: 'Bricks',
-    buyer_id: 'usr_kulkarni',
-    buyer_name: 'Amit Kulkarni',
-    seller_id: 'usr_kulkarni',
-    seller_name: 'Amit Kulkarni',
-    quantity: 1800,
-    unit: 'Pieces',
-    unit_price: 7.2,
-    total_price: 12960,
-    market_value: 20700,
-    money_saved: 7740,
-    waste_diverted_kg: 5400,
-    status: 'completed',
-    completion_date: '2026-10-25T16:00:00Z',
-    created_at: '2026-10-24T16:20:00Z',
-  },
-  {
-    id: 'tx_004',
-    material_id: 'mat_tiles_kharadi',
-    material_title: 'Kajaria Double-Charge Vitrified Floor Tiles (600x1200mm)',
-    material_category: 'Tiles',
-    buyer_id: 'usr_kulkarni',
-    buyer_name: 'Amit Kulkarni',
-    seller_id: 'usr_kulkarni',
-    seller_name: 'Amit Kulkarni',
-    quantity: 150,
-    unit: 'Sq. Ft',
-    unit_price: 48,
-    total_price: 7200,
-    market_value: 12750,
-    money_saved: 5550,
-    waste_diverted_kg: 1200,
-    status: 'completed',
-    completion_date: '2026-10-20T11:00:00Z',
-    created_at: '2026-10-19T10:00:00Z',
-  },
-  {
-    id: 'tx_005',
-    material_id: 'mat_wood_baner',
-    material_title: '18mm Film-Faced Marine Shuttering Plywood Planks',
-    material_category: 'Wooden Materials',
-    buyer_id: 'usr_deshmukh',
-    buyer_name: 'Sunita Deshmukh',
-    seller_id: 'usr_patil',
-    seller_name: 'Rajesh Patil',
-    quantity: 25,
-    unit: 'Pieces',
-    unit_price: 850,
-    total_price: 21250,
-    market_value: 40000,
-    money_saved: 18750,
-    waste_diverted_kg: 750,
-    status: 'completed',
-    completion_date: '2026-10-15T14:00:00Z',
-    created_at: '2026-10-14T09:00:00Z',
-  },
-];
+const LEGACY_DEMO_MATERIAL_IDS = new Set([
+  'mat_cement_hinj',
+  'mat_steel_hinj',
+  'mat_bricks_kharadi',
+  'mat_tiles_kharadi',
+  'mat_sand_wakad',
+  'mat_pipes_wakad',
+  'mat_wood_baner',
+  'mat_electrical_viman',
+  'mat_paint_pimpri',
+  'mat_granite_hinj',
+  'mat_steel_balewadi',
+  'mat_stone_magarpatta',
+  'mat_blocks_ravet',
+  'mat_roofing_chakan',
+  'mat_doors_bavdhan',
+  'mat_pipes_moshi',
+  'mat_tiles_kalyani',
+  'mat_paint_wagholi',
+  'mat_aggregate_undri',
+  'mat_electrical_swargate',
+  // Legacy seeded UUIDs from supabase/setup.sql so old 10-item seed does not flood reduced marketplace
+  'c0000001-0000-0000-0000-000000000001',
+  'c0000002-0000-0000-0000-000000000002',
+  'c0000003-0000-0000-0000-000000000003',
+  'c0000004-0000-0000-0000-000000000004',
+  'c0000005-0000-0000-0000-000000000005',
+  'c0000006-0000-0000-0000-000000000006',
+  'c0000007-0000-0000-0000-000000000007',
+  'c0000008-0000-0000-0000-000000000008',
+  'c0000009-0000-0000-0000-000000000009',
+  'c0000010-0000-0000-0000-000000000010',
+]);
 
-const INITIAL_NOTIFICATIONS: NotificationItem[] = [
-  {
-    id: 'notif_001',
-    user_id: 'usr_patil',
-    title: 'Purchase Request Completed',
-    message: 'Sunita Deshmukh has finalized payment & pickup of 150 Bags UltraTech Cement from Hinjawadi site.',
-    type: 'transaction_completed',
-    link: '/seller',
-    is_read: false,
-    created_at: '2026-11-04T12:05:00Z',
-  },
-  {
-    id: 'notif_002',
-    user_id: 'usr_shinde',
-    title: 'New Purchase Request Received',
-    message: 'Sunita Deshmukh submitted a purchase request for 5 units of Asian Paints Apex Ultima.',
-    type: 'request_received',
-    link: '/seller',
-    is_read: false,
-    created_at: '2026-11-07T18:01:00Z',
-  },
-  {
-    id: 'notif_003',
-    user_id: 'usr_deshmukh',
-    title: 'Pune Circular Impact Milestone',
-    message: 'Congratulations! Your purchases have diverted 11.75 tons of construction waste from Pune landfills.',
-    type: 'system',
-    link: '/impact',
-    is_read: true,
-    created_at: '2026-11-05T09:00:00Z',
-  },
-];
+const LEGACY_DEMO_TX_IDS = new Set(['tx_001', 'tx_002', 'tx_003', 'tx_004', 'tx_005']);
+const LEGACY_DEMO_REQ_IDS = new Set(['req_001', 'req_002', 'req_003', 'req_004']);
+const LEGACY_DEMO_NOTIF_IDS = new Set(['notif_001', 'notif_002', 'notif_003']);
+
+function emitMaterialsUpdated(): void {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('matlink:materials-updated'));
+  }
+}
+
+function purgeLegacyDemoStorageOnce(): void {
+  try {
+    if (!localStorage.getItem('circubuild_demo_cleared_v1')) {
+      const filterKey = (key: string, legacyIds: Set<string>) => {
+        const raw = localStorage.getItem(`circubuild_${key}`);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          const cleaned = parsed.filter((item: any) => !legacyIds.has(item?.id));
+          localStorage.setItem(`circubuild_${key}`, JSON.stringify(cleaned));
+        }
+      };
+
+      filterKey('materials', LEGACY_DEMO_MATERIAL_IDS);
+      filterKey('transactions', LEGACY_DEMO_TX_IDS);
+      filterKey('requests', LEGACY_DEMO_REQ_IDS);
+      filterKey('notifications', LEGACY_DEMO_NOTIF_IDS);
+
+      const rawSites = localStorage.getItem('circubuild_sites');
+      if (rawSites) {
+        const parsedSites = JSON.parse(rawSites);
+        if (Array.isArray(parsedSites)) {
+          const cleanedSites = parsedSites.map((s: any) =>
+            String(s?.id || '').startsWith('site_') && !/^site_\d+$/.test(s.id)
+              ? { ...s, status: 'active', total_listings_count: 0 }
+              : s
+          );
+          localStorage.setItem('circubuild_sites', JSON.stringify(cleanedSites));
+        }
+      }
+
+      localStorage.setItem('circubuild_demo_cleared_v1', 'true');
+    }
+
+    // Seed the 2 clean starter marketplace items once while preserving any user-uploaded materials
+    if (!localStorage.getItem('matlink_starter_v2')) {
+      const rawMats = localStorage.getItem('circubuild_materials');
+      const existing: MaterialListing[] = rawMats ? JSON.parse(rawMats) : [];
+      const existingIds = new Set(existing.map((m) => m.id));
+      const toAdd = INITIAL_MATERIALS.filter((m) => !existingIds.has(m.id));
+      localStorage.setItem('circubuild_materials', JSON.stringify([...existing, ...toAdd]));
+      localStorage.setItem('matlink_starter_v2', 'true');
+    }
+  } catch (err) {
+    console.warn('Demo storage cleanup skipped:', err);
+  }
+}
+
+purgeLegacyDemoStorageOnce();
 
 // Helper to get from local storage or initialize
 function getStored<T>(key: string, defaultValue: T): T {
@@ -1477,37 +838,100 @@ export const db = {
     return newSite;
   },
 
-  // Materials
+  // Materials (Live Seller -> Buyer Marketplace sync)
+  subscribeToMaterials(onUpdate: () => void): () => void {
+    const handleCustom = () => onUpdate();
+    const handleStorage = (e: StorageEvent) => {
+      if (!e.key || e.key === 'circubuild_materials' || e.key === 'circubuild_sites') {
+        onUpdate();
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('matlink:materials-updated', handleCustom);
+      window.addEventListener('storage', handleStorage);
+    }
+
+    let channel: any = null;
+    if (supabase) {
+      try {
+        channel = supabase
+          .channel(`materials-sync-${Date.now()}`)
+          .on(
+            'postgres_changes',
+            { event: '*', schema: 'public', table: 'materials' },
+            () => onUpdate()
+          )
+          .on(
+            'postgres_changes',
+            { event: '*', schema: 'public', table: 'material_images' },
+            () => onUpdate()
+          )
+          .subscribe();
+      } catch (err) {
+        console.warn('Supabase realtime subscription skipped:', err);
+      }
+    }
+
+    // Background polling fallback so Buyer Mode stays automatically updated even if Realtime is disabled
+    const pollInterval = setInterval(() => {
+      onUpdate();
+    }, 6000);
+
+    return () => {
+      clearInterval(pollInterval);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('matlink:materials-updated', handleCustom);
+        window.removeEventListener('storage', handleStorage);
+      }
+      if (supabase && channel) {
+        try {
+          supabase.removeChannel(channel);
+        } catch (err) {
+          console.warn('Supabase channel cleanup skipped:', err);
+        }
+      }
+    };
+  },
+
   async getMaterials(): Promise<MaterialListing[]> {
     const stored = getStored<MaterialListing[]>('materials', INITIAL_MATERIALS);
-    const existingIds = new Set(stored.map((m) => m.id));
-    const missing = INITIAL_MATERIALS.filter((m) => !existingIds.has(m.id));
-    let localMerged = stored;
-    if (missing.length > 0) {
-      localMerged = [...stored, ...missing];
-      setStored('materials', localMerged);
-    }
+    const localFiltered = stored.filter((m) => !LEGACY_DEMO_MATERIAL_IDS.has(m.id));
+    const map = new Map<string, MaterialListing>();
+    localFiltered.forEach((m) => map.set(m.id, m));
 
     if (supabase) {
       try {
-        const { data, error } = await supabase
+        let { data, error } = await supabase
           .from('materials')
           .select('*, material_images(image_url, is_primary), profiles(full_name, phone_number, company_name)')
           .order('created_at', { ascending: false });
+
+        // Retry simple select if joined relation fails due to RLS or schema cache
+        if (error) {
+          const fallbackRes = await supabase
+            .from('materials')
+            .select('*, material_images(image_url, is_primary)')
+            .order('created_at', { ascending: false });
+          data = fallbackRes.data;
+          error = fallbackRes.error;
+        }
+
         if (!error && data && data.length > 0) {
-          const map = new Map<string, MaterialListing>();
-          localMerged.forEach((m) => map.set(m.id, m));
           data.forEach((row: any) => {
+            if (LEGACY_DEMO_MATERIAL_IDS.has(row.id)) return;
+            const existingLocal = map.get(row.id);
             const imgs = Array.isArray(row.material_images)
               ? row.material_images.map((i: any) => i.image_url).filter(Boolean)
               : [];
             map.set(row.id, {
               id: row.id,
               seller_id: row.seller_id,
-              seller_name: row.profiles?.full_name,
-              seller_phone: row.profiles?.phone_number,
-              seller_company: row.profiles?.company_name,
-              site_id: row.site_id || undefined,
+              seller_name: row.profiles?.full_name || existingLocal?.seller_name,
+              seller_phone: row.profiles?.phone_number || existingLocal?.seller_phone,
+              seller_company: row.profiles?.company_name || existingLocal?.seller_company,
+              site_id: row.site_id || existingLocal?.site_id || undefined,
+              site_name: existingLocal?.site_name,
               title: row.title,
               category: row.category,
               description: row.description || '',
@@ -1519,26 +943,31 @@ export const db = {
               condition: row.condition,
               status: row.status,
               location_name: row.location_name,
-              latitude: row.latitude !== null && row.latitude !== undefined ? Number(row.latitude) : 18.5204,
-              longitude: row.longitude !== null && row.longitude !== undefined ? Number(row.longitude) : 73.8567,
+              latitude:
+                row.latitude !== null && row.latitude !== undefined ? Number(row.latitude) : 18.5204,
+              longitude:
+                row.longitude !== null && row.longitude !== undefined ? Number(row.longitude) : 73.8567,
               ai_inspected: Boolean(row.ai_inspected),
               ai_inspection_notes: row.ai_inspection_notes || undefined,
               images:
                 imgs.length > 0
                   ? imgs
+                  : existingLocal?.images && existingLocal.images.length > 0
+                  ? existingLocal.images
                   : ['https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&auto=format&fit=crop&q=80'],
               created_at: row.created_at,
               updated_at: row.updated_at,
             });
           });
-          return Array.from(map.values());
         }
       } catch (err) {
         console.warn('Supabase getMaterials fallback:', err);
       }
     }
 
-    return localMerged;
+    return Array.from(map.values()).sort(
+      (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
   },
 
   async getMaterialById(id: string): Promise<MaterialListing | null> {
@@ -1580,14 +1009,19 @@ export const db = {
         if (!error && data?.id) {
           newId = data.id;
           if (listing.images && listing.images.length > 0) {
-            await supabase.from('material_images').insert(
+            const { error: imgErr } = await supabase.from('material_images').insert(
               listing.images.slice(0, 5).map((url, idx) => ({
                 material_id: newId,
                 image_url: url,
                 is_primary: idx === 0,
               }))
             );
+            if (imgErr) {
+              console.warn('Supabase material_images insert warning:', imgErr.message);
+            }
           }
+        } else if (error) {
+          console.warn('Supabase addMaterial insert warning:', error.message);
         }
       } catch (err) {
         console.warn('Supabase addMaterial fallback:', err);
@@ -1602,12 +1036,13 @@ export const db = {
     materials.unshift(newListing);
     setStored('materials', materials);
 
-    // Update site's listing count if associated
+    // Update site's listing count and availability status if associated
     if (newListing.site_id) {
       const sites = await this.getConstructionSites();
       const site = sites.find((s) => s.id === newListing.site_id);
       if (site) {
         site.total_listings_count = (site.total_listings_count || 0) + 1;
+        site.status = 'materials_available';
         setStored('sites', sites);
       }
     }
@@ -1615,12 +1050,13 @@ export const db = {
     // Add notification
     await this.addNotification({
       user_id: newListing.seller_id,
-      title: 'Listing Published Successfully',
-      message: `Your listing for "${newListing.title}" is now active on the Pune marketplace.`,
+      title: 'Listing Published to Buyer Marketplace',
+      message: `Your listing for "${newListing.title}" is now automatically visible in Buyer Mode.`,
       type: 'system',
       link: `/materials/${newListing.id}`,
     });
 
+    emitMaterialsUpdated();
     return newListing;
   },
 
@@ -1655,6 +1091,7 @@ export const db = {
       }
     }
 
+    emitMaterialsUpdated();
     return updated;
   },
 
@@ -1671,6 +1108,7 @@ export const db = {
       }
     }
 
+    emitMaterialsUpdated();
     return true;
   },
 

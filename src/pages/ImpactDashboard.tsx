@@ -76,16 +76,9 @@ export const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ onNavigate }) 
     return transactions.filter((t) => new Date(t.created_at).getTime() >= cutoff);
   }, [transactions, timeFilter]);
 
-  // Chart 1: Market Price vs Platform Price by Category
+  // Chart 1: Market Price vs Platform Price by Category (shown only when orders exist)
   const priceComparisonData = useMemo(() => {
-    return [
-      { category: 'Cement (Bag)', market: 410, platform: 275, savings: 135 },
-      { category: 'Steel (Ton)', market: 68000, platform: 48000, savings: 20000 },
-      { category: 'Bricks (Pcs)', market: 11.5, platform: 7.2, savings: 4.3 },
-      { category: 'Tiles (Sq.Ft)', market: 85, platform: 48, savings: 37 },
-      { category: 'Sand (Truck)', market: 18500, platform: 12000, savings: 6500 },
-      { category: 'Shuttering Wood', market: 1600, platform: 850, savings: 750 },
-    ];
+    return [];
   }, []);
 
   // Chart 2: Category Breakdown of Reused Materials
@@ -102,29 +95,38 @@ export const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ onNavigate }) 
     }));
   }, [filteredTxs]);
 
-  // Chart 3: Monthly Buyer Savings
+  // Chart 3: Monthly Buyer Savings (real transactions only)
   const monthlySavingsData = useMemo(() => {
-    return [
-      { month: 'Jun 2026', savings: 18500, co2AvoidedKg: 2100 },
-      { month: 'Jul 2026', savings: 34200, co2AvoidedKg: 3800 },
-      { month: 'Aug 2026', savings: 52000, co2AvoidedKg: 5900 },
-      { month: 'Sep 2026', savings: 78000, co2AvoidedKg: 8700 },
-      { month: 'Oct 2026', savings: 104500, co2AvoidedKg: 12400 },
-      { month: 'Nov 2026', savings: 122290, co2AvoidedKg: 15100 },
-    ];
-  }, []);
+    if (filteredTxs.length === 0) return [];
+    const byMonth: Record<string, { savings: number; co2AvoidedKg: number }> = {};
+    filteredTxs.forEach((t) => {
+      const m = new Date(t.completion_date || t.created_at).toLocaleDateString('en-US', {
+        month: 'short',
+        year: 'numeric',
+      });
+      if (!byMonth[m]) byMonth[m] = { savings: 0, co2AvoidedKg: 0 };
+      byMonth[m].savings += t.money_saved;
+      byMonth[m].co2AvoidedKg += Math.round(t.waste_diverted_kg * 0.82);
+    });
+    return Object.entries(byMonth).map(([month, v]) => ({ month, ...v }));
+  }, [filteredTxs]);
 
-  // Chart 4: Cumulative Material Reused Growth (Metric Tons)
+  // Chart 4: Cumulative Material Reused Growth (real transactions only)
   const cumulativeReuseData = useMemo(() => {
-    return [
-      { month: 'Jun', reusedTons: 2.2, activeSites: 2 },
-      { month: 'Jul', reusedTons: 5.6, activeSites: 4 },
-      { month: 'Aug', reusedTons: 9.1, activeSites: 5 },
-      { month: 'Sep', reusedTons: 13.4, activeSites: 6 },
-      { month: 'Oct', reusedTons: 16.8, activeSites: 7 },
-      { month: 'Nov', reusedTons: 18.4, activeSites: 8 },
-    ];
-  }, []);
+    if (filteredTxs.length === 0) return [];
+    let runningTons = 0;
+    return filteredTxs.map((t) => {
+      runningTons += t.waste_diverted_kg / 1000;
+      return {
+        month: new Date(t.completion_date || t.created_at).toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+        }),
+        reusedTons: Number(runningTons.toFixed(2)),
+        activeSites: metrics?.activeConstructionSitesCount || 0,
+      };
+    });
+  }, [filteredTxs, metrics]);
 
   const totalCalculatedSavings = filteredTxs.reduce((sum, t) => sum + t.money_saved, 0);
   const totalCalculatedWasteKg = filteredTxs.reduce((sum, t) => sum + t.waste_diverted_kg, 0);
@@ -228,33 +230,36 @@ export const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ onNavigate }) 
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-display font-bold text-base text-[#252536]">
-                Market Price vs Platform Reused Price (₹)
+                Transaction Price Comparison (₹)
               </h3>
               <p className="text-xs text-[#8B8D98]">
-                Average price comparison per unit showing direct contractor savings
+                Populates automatically once completed exchanges are recorded
               </p>
             </div>
-            <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">
-              46% Avg Discount
-            </span>
           </div>
 
-          <div className="h-72 w-full pt-2">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={priceComparisonData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
-                <XAxis dataKey="category" tick={{ fontSize: 11, fill: '#8B8D98' }} interval={0} angle={-15} textAnchor="end" />
-                <YAxis tick={{ fontSize: 11, fill: '#8B8D98' }} />
-                <Tooltip
-                  formatter={(val: any) => [`₹${Number(val).toLocaleString('en-IN')}`, '']}
-                  contentStyle={{ backgroundColor: '#ffffff', borderRadius: 12, border: '1px solid #E5E7EB', fontSize: 12 }}
-                />
-                <Legend wrapperStyle={{ fontSize: 12, paddingTop: 10 }} />
-                <Bar dataKey="market" name="Original Market Rate (₹)" fill="#8B8D98" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="platform" name="CircuBuild Reused Rate (₹)" fill="#7561A8" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          {priceComparisonData.length === 0 ? (
+            <div className="h-72 w-full flex items-center justify-center rounded-2xl bg-[#F1F2F5]/60 text-xs text-[#8B8D98] text-center px-6">
+              No materials sold as a demo yet. Completed material handovers will display here.
+            </div>
+          ) : (
+            <div className="h-72 w-full pt-2">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={priceComparisonData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
+                  <XAxis dataKey="category" tick={{ fontSize: 11, fill: '#8B8D98' }} interval={0} angle={-15} textAnchor="end" />
+                  <YAxis tick={{ fontSize: 11, fill: '#8B8D98' }} />
+                  <Tooltip
+                    formatter={(val: any) => [`₹${Number(val).toLocaleString('en-IN')}`, '']}
+                    contentStyle={{ backgroundColor: '#ffffff', borderRadius: 12, border: '1px solid #E5E7EB', fontSize: 12 }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: 12, paddingTop: 10 }} />
+                  <Bar dataKey="market" name="Original Rate (₹)" fill="#8B8D98" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="platform" name="MatLink Rate (₹)" fill="#7561A8" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          )}
         </div>
 
         {/* 2. Pie Chart: Category Distribution (5 Cols) */}
@@ -268,34 +273,40 @@ export const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ onNavigate }) 
             </p>
           </div>
 
-          <div className="h-72 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={categoryBreakdownData}
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={85}
-                  innerRadius={45}
-                  paddingAngle={4}
-                  dataKey="value"
-                  label={({ name, percent }: any) => `${name} (${(((percent as number) || 0) * 100).toFixed(0)}%)`}
-                  labelLine={false}
-                >
-                  {categoryBreakdownData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={CATEGORY_COLORS[entry.name] || '#7561A8'}
-                    />
-                  ))}
-                </Pie>
-                <Tooltip
-                  formatter={(val: any) => [`${(Number(val) / 1000).toFixed(2)} Metric Tons`, 'Diverted']}
-                  contentStyle={{ backgroundColor: '#ffffff', borderRadius: 12, border: '1px solid #E5E7EB', fontSize: 12 }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+          {categoryBreakdownData.length === 0 ? (
+            <div className="h-72 w-full flex items-center justify-center rounded-2xl bg-[#F1F2F5]/60 text-xs text-[#8B8D98] text-center px-6">
+              No materials sold yet. Category reuse breakdown will appear here.
+            </div>
+          ) : (
+            <div className="h-72 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={categoryBreakdownData}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={85}
+                    innerRadius={45}
+                    paddingAngle={4}
+                    dataKey="value"
+                    label={({ name, percent }: any) => `${name} (${(((percent as number) || 0) * 100).toFixed(0)}%)`}
+                    labelLine={false}
+                  >
+                    {categoryBreakdownData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={CATEGORY_COLORS[entry.name] || '#7561A8'}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(val: any) => [`${(Number(val) / 1000).toFixed(2)} Metric Tons`, 'Diverted']}
+                    contentStyle={{ backgroundColor: '#ffffff', borderRadius: 12, border: '1px solid #E5E7EB', fontSize: 12 }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          )}
         </div>
       </div>
 
@@ -312,29 +323,35 @@ export const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ onNavigate }) 
             </p>
           </div>
 
-          <div className="h-72 w-full pt-2">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={monthlySavingsData} margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
-                <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#8B8D98' }} />
-                <YAxis tick={{ fontSize: 11, fill: '#8B8D98' }} />
-                <Tooltip
-                  formatter={(val: any) => [`₹${Number(val).toLocaleString('en-IN')}`, 'Saved']}
-                  contentStyle={{ backgroundColor: '#ffffff', borderRadius: 12, border: '1px solid #E5E7EB', fontSize: 12 }}
-                />
-                <Legend wrapperStyle={{ fontSize: 12, paddingTop: 10 }} />
-                <Line
-                  type="monotone"
-                  dataKey="savings"
-                  name="Money Saved (₹)"
-                  stroke="#7561A8"
-                  strokeWidth={3}
-                  dot={{ r: 4, fill: '#7561A8' }}
-                  activeDot={{ r: 6 }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          {monthlySavingsData.length === 0 ? (
+            <div className="h-72 w-full flex items-center justify-center rounded-2xl bg-[#F1F2F5]/60 text-xs text-[#8B8D98] text-center px-6">
+              No materials sold in demo yet. Monthly savings will plot once handovers complete.
+            </div>
+          ) : (
+            <div className="h-72 w-full pt-2">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={monthlySavingsData} margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
+                  <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#8B8D98' }} />
+                  <YAxis tick={{ fontSize: 11, fill: '#8B8D98' }} />
+                  <Tooltip
+                    formatter={(val: any) => [`₹${Number(val).toLocaleString('en-IN')}`, 'Saved']}
+                    contentStyle={{ backgroundColor: '#ffffff', borderRadius: 12, border: '1px solid #E5E7EB', fontSize: 12 }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: 12, paddingTop: 10 }} />
+                  <Line
+                    type="monotone"
+                    dataKey="savings"
+                    name="Money Saved (₹)"
+                    stroke="#7561A8"
+                    strokeWidth={3}
+                    dot={{ r: 4, fill: '#7561A8' }}
+                    activeDot={{ r: 6 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          )}
         </div>
 
         {/* 4. Area Chart: Growth in Material Reuse (6 Cols) */}
@@ -348,35 +365,41 @@ export const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ onNavigate }) 
             </p>
           </div>
 
-          <div className="h-72 w-full pt-2">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={cumulativeReuseData} margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
-                <defs>
-                  <linearGradient id="reuseGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10B981" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#10B981" stopOpacity={0.0} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
-                <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#8B8D98' }} />
-                <YAxis tick={{ fontSize: 11, fill: '#8B8D98' }} />
-                <Tooltip
-                  formatter={(val: any) => [`${val} Metric Tons`, 'Reused']}
-                  contentStyle={{ backgroundColor: '#ffffff', borderRadius: 12, border: '1px solid #E5E7EB', fontSize: 12 }}
-                />
-                <Legend wrapperStyle={{ fontSize: 12, paddingTop: 10 }} />
-                <Area
-                  type="monotone"
-                  dataKey="reusedTons"
-                  name="Material Reused (MT)"
-                  stroke="#10B981"
-                  strokeWidth={2.5}
-                  fillOpacity={1}
-                  fill="url(#reuseGradient)"
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
+          {cumulativeReuseData.length === 0 ? (
+            <div className="h-72 w-full flex items-center justify-center rounded-2xl bg-[#F1F2F5]/60 text-xs text-[#8B8D98] text-center px-6">
+              No materials sold in demo yet. Reuse growth metrics will appear once orders complete.
+            </div>
+          ) : (
+            <div className="h-72 w-full pt-2">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={cumulativeReuseData} margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
+                  <defs>
+                    <linearGradient id="reuseGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#10B981" stopOpacity={0.4} />
+                      <stop offset="95%" stopColor="#10B981" stopOpacity={0.0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
+                  <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#8B8D98' }} />
+                  <YAxis tick={{ fontSize: 11, fill: '#8B8D98' }} />
+                  <Tooltip
+                    formatter={(val: any) => [`${val} Metric Tons`, 'Reused']}
+                    contentStyle={{ backgroundColor: '#ffffff', borderRadius: 12, border: '1px solid #E5E7EB', fontSize: 12 }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: 12, paddingTop: 10 }} />
+                  <Area
+                    type="monotone"
+                    dataKey="reusedTons"
+                    name="Material Reused (MT)"
+                    stroke="#10B981"
+                    strokeWidth={2.5}
+                    fillOpacity={1}
+                    fill="url(#reuseGradient)"
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          )}
         </div>
       </div>
 

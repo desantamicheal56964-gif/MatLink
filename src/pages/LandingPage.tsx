@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   ArrowRight,
   Sparkles,
   ShoppingBag,
   PlusCircle,
-  ShieldCheck,
   Leaf,
-  TrendingDown,
   Building,
   MapPin,
   CheckCircle,
-  HelpCircle,
   ChevronDown,
   Layers,
   Recycle,
   DollarSign,
-  Eye,
 } from 'lucide-react';
 import { db } from '../services/db';
-import { MaterialListing, PlatformMetrics, ConstructionSite } from '../types';
+import { MaterialListing, PlatformMetrics } from '../types';
 
 interface LandingPageProps {
   onNavigate: (page: string, params?: any) => void;
@@ -27,20 +23,22 @@ interface LandingPageProps {
 export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   const [featuredMaterials, setFeaturedMaterials] = useState<MaterialListing[]>([]);
   const [metrics, setMetrics] = useState<PlatformMetrics | null>(null);
-  const [sites, setSites] = useState<ConstructionSite[]>([]);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  useEffect(() => {
-    async function loadData() {
-      const mats = await db.getMaterials();
-      setFeaturedMaterials(mats.filter((m) => m.status === 'available').slice(0, 4));
-      const met = await db.getPlatformMetrics();
-      setMetrics(met);
-      const s = await db.getConstructionSites();
-      setSites(s.slice(0, 4));
-    }
-    loadData();
+  const loadData = useCallback(async () => {
+    const mats = await db.getMaterials();
+    setFeaturedMaterials(mats.filter((m) => m.status === 'available').slice(0, 3));
+    const met = await db.getPlatformMetrics();
+    setMetrics(met);
   }, []);
+
+  useEffect(() => {
+    loadData();
+    const unsubscribe = db.subscribeToMaterials(() => {
+      loadData();
+    });
+    return unsubscribe;
+  }, [loadData]);
 
   const faqs = [
     {
@@ -109,21 +107,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             </div>
 
             {/* Quick Proof Highlights */}
-            <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto text-left">
-              <div className="bg-white/80 p-3 rounded-xl border border-gray-100 shadow-2xs">
-                <p className="text-[11px] text-[#8B8D98]">Average Buyer Savings</p>
-                <p className="text-base font-bold text-[#7561A8]">38% - 55% Off</p>
-              </div>
+            <div className="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-xl mx-auto text-left">
               <div className="bg-white/80 p-3 rounded-xl border border-gray-100 shadow-2xs">
                 <p className="text-[11px] text-[#8B8D98]">Waste Diverted</p>
-                <p className="text-base font-bold text-emerald-600">
-                  {metrics ? `${(metrics.totalMaterialReusedKg / 1000).toFixed(1)} Tons` : '18.4 Tons'}
+                <p className="text-base font-bold text-emerald-600 tabular-nums">
+                  {metrics ? `${(metrics.totalMaterialReusedKg / 1000).toFixed(1)} Tons` : '0.0 Tons'}
                 </p>
               </div>
               <div className="bg-white/80 p-3 rounded-xl border border-gray-100 shadow-2xs">
                 <p className="text-[11px] text-[#8B8D98]">Pune Sites Active</p>
-                <p className="text-base font-bold text-[#51416F]">
-                  {metrics?.activeConstructionSitesCount || 8} Locations
+                <p className="text-base font-bold text-[#51416F] tabular-nums">
+                  {metrics?.activeConstructionSitesCount || 0} Locations
                 </p>
               </div>
               <div className="bg-white/80 p-3 rounded-xl border border-gray-100 shadow-2xs">
@@ -198,48 +192,74 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 3. FEATURED ACTIVE LISTINGS */}
+      {/* 3. MARKETPLACE PREVIEW (COMING SOON WHEN EMPTY) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-[#7561A8]">Pune Marketplace</span>
             <h2 className="font-display font-bold text-2xl sm:text-3xl text-[#252536]">
-              Featured Surplus Construction Materials
+              Surplus Construction Materials
             </h2>
             <p className="text-xs sm:text-sm text-[#8B8D98]">
-              Ready for immediate purchase and site pickup across Pune metropolitan area.
+              Verified construction stock shared by active sites across the Pune metropolitan area.
             </p>
           </div>
           <button
             onClick={() => onNavigate('explore')}
             className="text-xs sm:text-sm font-semibold text-[#7561A8] hover:text-[#51416F] flex items-center gap-1.5"
           >
-            View All Materials ({featuredMaterials.length > 0 ? '10+' : '0'})
+            Open Marketplace
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featuredMaterials.map((mat) => {
-            const savingsPercent = Math.round(
-              ((mat.original_market_price - mat.selling_price) / mat.original_market_price) * 100
-            );
-            return (
+        {featuredMaterials.length === 0 ? (
+          <div className="bg-white rounded-3xl border border-gray-200/80 p-10 sm:p-12 text-center shadow-xs space-y-4">
+            <div className="w-14 h-14 rounded-2xl bg-[#7561A8]/10 text-[#7561A8] flex items-center justify-center mx-auto">
+              <Layers className="w-7 h-7" />
+            </div>
+            <div className="max-w-lg mx-auto space-y-2">
+              <h3 className="font-display font-bold text-xl sm:text-2xl text-[#252536]">
+                The materials are coming soon
+              </h3>
+              <p className="text-xs sm:text-sm text-[#51416F]/85 leading-relaxed">
+                No materials are listed or sold as a demo right now. Surplus stock uploaded by Pune construction sites will appear here soon.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+              <button
+                onClick={() => onNavigate('map')}
+                className="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-[#7561A8] hover:bg-[#51416F] text-white transition-colors inline-flex items-center gap-1.5"
+              >
+                <MapPin className="w-4 h-4" />
+                <span>Explore Pune Site Map</span>
+              </button>
+              <button
+                onClick={() => onNavigate('inspector')}
+                className="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-[#F1F2F5] hover:bg-gray-200 text-[#252536] transition-colors inline-flex items-center gap-1.5"
+              >
+                <Sparkles className="w-4 h-4 text-[#7561A8]" />
+                <span>Try AI Inspector</span>
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredMaterials.map((mat) => (
               <div
                 key={mat.id}
                 onClick={() => onNavigate('material-details', { id: mat.id })}
                 className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-xs hover:shadow-lg transition-all cursor-pointer group flex flex-col justify-between"
               >
                 <div>
-                  {/* Image */}
-                  <div className="relative h-44 overflow-hidden bg-gray-100">
+                  <div className="relative h-48 overflow-hidden bg-gray-100">
                     <img
                       src={mat.images[0]}
                       alt={mat.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#7561A8] text-white shadow-xs">
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#7561A8] text-white shadow-xs">
                         {mat.category}
                       </span>
                       {mat.ai_inspected && (
@@ -249,12 +269,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                         </span>
                       )}
                     </div>
-                    <span className="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md text-[11px] font-bold bg-emerald-600 text-white shadow-xs">
-                      {savingsPercent}% OFF
-                    </span>
                   </div>
 
-                  {/* Body */}
                   <div className="p-4 space-y-2">
                     <h3 className="font-bold text-sm text-[#252536] line-clamp-1 group-hover:text-[#7561A8] transition-colors">
                       {mat.title}
@@ -263,37 +279,31 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                       <MapPin className="w-3.5 h-3.5 text-[#7561A8]" />
                       <span className="truncate">{mat.location_name}</span>
                     </div>
-
-                    <div className="pt-2 flex items-baseline justify-between border-t border-gray-100">
-                      <div>
-                        <span className="text-[10px] text-[#8B8D98] block">Selling Price</span>
-                        <span className="text-base font-extrabold text-[#252536]">
-                          ₹{mat.selling_price.toLocaleString('en-IN')}
-                        </span>
-                        <span className="text-[10px] text-[#8B8D98] ml-1">/ {mat.unit}</span>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-[10px] text-[#8B8D98] block">Market</span>
-                        <span className="text-xs line-through text-gray-400">
-                          ₹{mat.original_market_price.toLocaleString('en-IN')}
-                        </span>
-                      </div>
-                    </div>
+                    <p className="text-[11px] text-[#51416F]">
+                      Condition: <strong className="text-[#252536]">{mat.condition}</strong>
+                    </p>
                   </div>
                 </div>
 
-                <div className="px-4 pb-4 pt-1 flex items-center justify-between text-xs text-[#51416F]">
-                  <span className="text-[11px] font-medium bg-[#F1F2F5] px-2 py-0.5 rounded">
-                    Qty: {mat.available_quantity} {mat.unit}
-                  </span>
+                <div className="px-4 pb-4 pt-2 border-t border-gray-100 flex items-center justify-between text-xs text-[#51416F]">
+                  <div className="flex items-center gap-2 tabular-nums">
+                    <span className="text-[11px] font-medium bg-[#F1F2F5] px-2 py-0.5 rounded">
+                      {mat.available_quantity} {mat.unit}
+                    </span>
+                    {mat.selling_price > 0 && (
+                      <span className="text-[11px] font-bold text-[#7561A8]">
+                        ₹{mat.selling_price.toLocaleString('en-IN')}/{mat.unit}
+                      </span>
+                    )}
+                  </div>
                   <span className="text-xs font-semibold text-[#7561A8] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                    Inspect <ArrowRight className="w-3.5 h-3.5" />
+                    View <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* 4. AI MATERIAL INSPECTION SPOTLIGHT */}
@@ -366,7 +376,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-3">
-                  <p className="text-white text-xs font-medium">UltraTech OPC 53 Grade Cement - Hinjawadi Phase 3</p>
+                  <p className="text-white text-xs font-medium">Sample Material Condition Screening — Pune Site</p>
                 </div>
               </div>
 
@@ -471,17 +481,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs text-center space-y-1">
               <DollarSign className="w-7 h-7 text-[#7561A8] mx-auto mb-1" />
-              <p className="text-2xl font-black text-[#252536]">
-                ₹{metrics?.totalMoneySaved.toLocaleString('en-IN') || '1,22,290'}
+              <p className="text-2xl font-black text-[#252536] tabular-nums">
+                ₹{(metrics?.totalMoneySaved ?? 0).toLocaleString('en-IN')}
               </p>
               <p className="text-xs font-bold text-[#51416F]">Total Money Saved by Buyers</p>
-              <p className="text-[10px] text-[#8B8D98]">Calculated: (Market Price - Selling Price) × Qty</p>
+              <p className="text-[10px] text-[#8B8D98]">Calculated from verified completed orders</p>
             </div>
 
             <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs text-center space-y-1">
               <Recycle className="w-7 h-7 text-emerald-600 mx-auto mb-1" />
-              <p className="text-2xl font-black text-emerald-600">
-                {metrics ? `${(metrics.totalMaterialReusedKg / 1000).toFixed(1)} Tons` : '18.4 Tons'}
+              <p className="text-2xl font-black text-emerald-600 tabular-nums">
+                {metrics ? `${(metrics.totalMaterialReusedKg / 1000).toFixed(1)} Tons` : '0.0 Tons'}
               </p>
               <p className="text-xs font-bold text-[#51416F]">Construction Waste Diverted</p>
               <p className="text-[10px] text-[#8B8D98]">Diverted from Pune municipal dump yards</p>
@@ -489,8 +499,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
             <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs text-center space-y-1">
               <Leaf className="w-7 h-7 text-teal-600 mx-auto mb-1" />
-              <p className="text-2xl font-black text-teal-700">
-                {metrics ? `${(metrics.co2DivertedKg / 1000).toFixed(1)} MT` : '15.1 MT'}
+              <p className="text-2xl font-black text-teal-700 tabular-nums">
+                {metrics ? `${(metrics.co2DivertedKg / 1000).toFixed(1)} MT` : '0.0 MT'}
               </p>
               <p className="text-xs font-bold text-[#51416F]">Embodied CO2 Avoided</p>
               <p className="text-[10px] text-[#8B8D98]">By avoiding virgin cement/steel manufacturing</p>
@@ -498,11 +508,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
             <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs text-center space-y-1">
               <Building className="w-7 h-7 text-[#72B9E8] mx-auto mb-1" />
-              <p className="text-2xl font-black text-[#252536]">
-                {metrics?.totalSuccessfulTransactions || 5} Orders
+              <p className="text-2xl font-black text-[#252536] tabular-nums">
+                {metrics?.totalSuccessfulTransactions ?? 0} Orders
               </p>
-              <p className="text-xs font-bold text-[#51416F]">Successful Material Exchanges</p>
-              <p className="text-[10px] text-[#8B8D98]">100% verified material handovers</p>
+              <p className="text-xs font-bold text-[#51416F]">Materials Sold (Demo)</p>
+              <p className="text-[10px] text-[#8B8D98]">No materials sold in demo yet</p>
             </div>
           </div>
 
